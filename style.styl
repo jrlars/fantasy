@@ -1,0 +1,1299 @@
+$phone-down = 'screen and (max-width: 768px)'
+$tablet-up = 'screen and (min-width: 768px)'
+$desktop-up = 'screen and (min-width: 992px)'
+$desktop-large-up = 'screen and (min-width: 1200px)'
+
+
+$red = #c1272d;
+$lightBlue = #45C7FF;
+$orange = #F7931E;
+$royalBlue = #0071BC;
+$yellow = #FCDE21;
+$lightGreen = #7DE82C;
+$forestGreen = #1C9F13;
+$gray = #8699A6;
+$purple = #9537B9;
+$gold = #E3C48F;
+$teal = #00C1CF;
+$berry = #C5004B;
+// $generic1 = #22B573;
+$generic1 = #3FC081;
+$generic2 = #00A99D;
+// $generic2 = #00B9D4;
+
+$textColor = #647383;
+$textColorBright = #a2a7ae;
+
+
+
+
+
+
+
+.theDiv
+    display inline-block
+
+h1
+    color red
+
+body
+    background-color #1A1E23
+    //background-color #1e2428
+    padding-left 8px
+    padding-right 8px
+    @media $tablet-up
+        padding-right 40px
+        padding-left 40px
+        margin 0
+    color white
+    font-family: 'Open Sans', sans-serif;
+
+#heroWrapper
+    @media $tablet-up
+        width calc(100% + 16px)
+        margin-left -40px
+        height 32px
+        padding-left 64px
+        padding-top 8px
+        font-size 16px
+        //background-color #86003D
+        background-color #434A55
+        #weeks
+            opacity .8
+        #weeks, #year
+            font-weight 700
+        #weeks, #filters, #year
+            display inline-block
+            margin-right 30px
+        #filters, #year
+            opacity .4
+        #year
+            font-weight 800
+        #filters
+            font-weight 400
+        #configureText
+            float right
+            margin-right 60px
+            display inline block
+            opacity .6
+            position relative
+            z-index 95
+        #configureIcon
+            position fixed
+            text-align center
+            right 0
+            top 0
+            width 40px
+            height 28px
+            padding 6px
+            background-color #434A55
+            opacity .6
+            cursor pointer
+            z-index 95
+            &:hover
+                opacity 1
+            #configureIconImg
+                position relative
+                width 70%
+
+#inactiveOverlay
+    width 120%
+    height 120%
+    position fixed
+    left -10%
+    top -10%
+    background-color #0b0d12
+    opacity .7
+    z-index 85
+
+.hidden
+    display none
+
+.visible
+    display block
+
+#configPanel
+    width 180px
+    height 100%
+    position fixed
+    top 0
+    background-color rgba(67,74,85,.8)
+    z-index 90
+    transition right .3s ease-in-out
+
+#configWrapper
+    padding-left 18px
+    padding-right 18px
+    padding-top 60px
+    color $textColorBright
+    font-size 12px
+    select, input
+        background-color white
+    .configName
+        @media $tablet-up
+            margin-bottom 4px
+            font-size 14px
+            font-weight 600
+    #configPosition
+        input
+            margin-right 4px
+        label
+            margin-right 6px
+    .checkboxWrapper
+        display inline-block
+        // background-color $textColor
+    .configOptions
+        @media $tablet-up
+            margin-bottom 32px
+    #configWeeksWrapper
+        p
+            margin 0
+        select, p
+            display inline-block
+            margin-right 6px
+        select
+            min-width 36px
+    #updatePage
+        padding 6px 18px
+        font-size 14px
+        background-color $royalBlue
+        border none
+        border-radius 3px
+        font-weight 700
+        cursor pointer
+        display block
+        width auto
+        text-align center
+        width 60px
+        color white
+        &:hover
+            opacity .8
+
+
+
+.configPanelOpen
+    right 0
+
+.configPanelClosed
+    right -181px
+
+
+#wrapper
+    padding-top 60px
+
+.playerDiv
+    display block
+    position relative
+    width 100%
+    height 162px
+    margin-bottom 14px
+    @media $tablet-up
+        height 136px
+        margin-bottom 21px
+
+    // padding-top 20px
+    // padding-bottom 20px
+    //padding-left 5%
+
+.playerDivBG
+    position absolute
+    width 100%
+    height 162px
+    @media $tablet-up
+        height 136px
+    background-color #0b0d12
+    opacity .3
+    z-index -1
+
+.playerRank
+    position absolute
+    left 12px
+    top 9px
+    opacity .5
+    @media $tablet-up
+        left 17px
+        top 40%
+        opacity .33
+    font-weight bold
+    color rgb(151, 176, 201)
+
+
+.playerNameWrapperDiv
+    position relative
+    width 80%
+    margin-top 8px
+    margin-left 40px
+    @media $tablet-up
+        width 18%
+        margin-left 5%
+        margin-top 12px
+    @media $desktop-up
+        width 20%
+        margin-left 3%
+        margin-top 8px
+    //height 100%
+
+
+    margin-right 2%
+    display inline-block
+    vertical-align top
+    // margin-bottom 30px
+
+.playerInitialsWrapper
+    position absolute
+    width 100%
+    //height 100%
+    z-index -1
+    margin-top 14px
+    display none
+    @media $desktop-up
+        display block
+
+
+.playerInitials
+    font-size 98px
+    display none
+    @media $tablet-up
+        font-size 80px
+    @media $desktop-up
+        font-size 98px
+        display block
+    padding 0
+    line-height 82px
+    text-align center
+    margin 0
+    color #0a0f14
+    opacity .5
+    font-weight 700
+    letter-spacing -6px
+
+.playerName
+    text-align center
+    font-size 14px
+    line-height 16px
+    letter-spacing 1px
+    display inline-block
+    margin 0
+    margin-right 4px
+    @media $tablet-up
+        display block
+        margin-right 0
+        font-size 16px
+        line-height 18px
+        letter-spacing 2px
+    @media $desktop-up
+        font-size 18px
+        line-height 20px
+        letter-spacing 3px
+    font-weight 500
+
+    //letter-spacing 3px
+    text-transform uppercase
+
+.playerFirstName
+    @media $tablet-up
+        margin-top 28px
+
+.playerInfo
+    margin-left 10px
+    display inline-block
+    margin-bottom 0
+    @media $tablet-up
+        margin-left 0
+        display block
+        width 100%
+    text-align center
+    font-size 12px
+    opacity .7
+    margin-top 3px
+
+.statNameDiv
+    @media $phone-down
+        margin-left 14px
+        padding-top 2px
+        float left
+    display inline-block
+    padding-top 6px
+    margin-right 7px
+
+.statNameP
+    font-size 10px
+    line-height 7px
+    text-transform uppercase
+    text-align right
+    font-weight 400
+    color #647383
+    transition all .4s linear
+    margin-top 9px
+    margin-bottom 9px
+    cursor pointer
+    @media $tablet-up
+        letter-spacing .75px
+        font-size 9px
+    @media $desktop-up
+        font-size 10px
+    &.focusP
+        font-weight 600
+        color #a2a7ae
+
+
+
+//Stat portion
+.statDiv
+    @media $phone-down
+        float left
+    width 40%
+    padding-top 12px
+    @media $tablet-up
+        width 33%
+        padding-top 16px
+    //height 100%
+    //background-color white
+    // opacity .1
+    vertical-align top
+    display inline-block
+    // padding-top 16px;
+
+
+.singleStatDivWrapper
+    height 16px
+    display block
+    transition height .4s linear
+    cursor pointer
+
+
+.thirtyTall
+    height 26px
+    .avgCircle
+        display block !important
+
+
+.singleStat
+    width 100%
+    height 6px
+    background-color rgba(10,15,20,.8)
+    //margin-bottom 13px
+    position relative
+    cursor pointer
+    transition margin-bottom .4s linear
+    .valNum
+        display none
+        // letter-spacing -3px
+    .valNumTight
+        color #444444
+        &:hover
+            color white
+            z-index 100
+    .opaque
+        opacity 0
+        display block
+        // margin-bottom 24px
+        transition opacity .8s linear
+    // &:hover
+    //     div
+    //         display block
+
+svg
+    float left
+
+
+.statHover
+    position absolute
+    height 16px
+    //padding 0px 6px
+    background-color #32363b
+    top -33px
+    text-align center
+    width 90px
+    transform translateX(-32px)
+    p
+        line-height 16px
+        margin 0
+        font-size 11px
+        letter-spacing .5px
+        font-weight 300
+
+.downCaret
+    position absolute
+    top 15px
+    left 35px
+    width 0
+    height 0
+    border-top 6px solid #32363b
+    border-right 6px solid transparent
+    border-left 6px solid transparent
+
+
+.valNum
+    position absolute
+    height 16px
+    // display none
+    //padding 0px 6px
+    // background-color #32363b
+    top 10px
+    text-align center
+    width 26px
+    transform translateX(-13px)
+    opacity .5
+    //transition opacity .8s linear
+    p
+        line-height 10px
+        margin 0
+        font-size 11px
+        letter-spacing -.4px
+        font-weight 300
+        div
+          display none
+        &:hover
+          div
+            display block
+    .statHover
+        p
+            line-height 16px
+        // opacity .4
+        // transition 6s linear
+
+// .valNumTight
+//     color green
+
+.labelNumDiv
+  position absolute
+  width 24px
+  top -4px
+  transition opacity .3s linear
+  p
+      line-height 16px
+      margin 0
+      font-size 11px
+      letter-spacing .5px
+      font-weight 300
+      text-align center
+      color: rgb(151, 176, 201)
+      opacity .6
+
+.labelNumRight
+  transform translateX(2px)
+
+.labelNumLeft
+  transform translateX(-24px)
+
+.opaque
+    opacity 0
+    display block
+    margin-bottom 24px
+    transition opacity .5s linear
+
+.nonFocus
+    opacity .7
+    transition opacity .4s ease-out
+    .avgCircle
+        display none
+
+.avgCircle
+    width 5px
+    height 5px
+    border-radius 2.5px
+    background-color #ffffff
+    opacity .65
+    position absolute
+    top 0
+    .avgPWrapper
+        display none
+        position absolute
+        height 16px
+        //padding 0px 6px
+        background-color #32363b
+        top -20px
+        text-align center
+        width 90px
+        transform translateX(-50%)
+        p
+            line-height 16px
+            margin 0
+            font-size 11px
+            letter-spacing .5px
+            font-weight 300
+    &:hover
+        opacity 1
+        .avgPWrapper
+            display block
+
+.moreTransp
+    opacity .12
+
+
+.statSpacer
+  width 100%
+  height 13px
+  background-color #449944
+
+
+
+
+
+//Week Graph
+
+.weekGraphBar
+    display inline-block
+    background-color red
+    position absolute
+    width 6px
+    bottom 0
+    min-height 3px
+    transition height .5s ease
+    cursor pointer
+    &:hover
+        opacity 1 !important
+        .statHover
+            display block
+    .statHover
+        display none
+        transform translateX(-36px)
+        z-index 90
+        top -26px
+
+.weekGraphHR
+    border-color #647383
+    position absolute
+    // width 100%
+    bottom 5px
+    margin 0
+    left 50%
+    z-index -1
+    opacity .5
+    display none
+
+
+.weekGraphDivWrapper
+    @media $phone-down
+        float right
+        margin-right 2%
+    display inline-block
+    position relative
+    width 20%
+    vertical-align top
+    // padding-left 5%
+    // padding-top 20px
+    @media $tablet-up
+        padding-left 3%
+        width 9%
+        margin-top 20px
+    @media $desktop-up
+        padding-left 4%
+        width 10%
+
+.weekGraphDiv
+    display block
+    position relative
+    vertical-align top
+    height 36px
+    @media $tablet-up
+        height 66px
+
+
+.targetGraphDivWrapper
+    @media $phone-down
+        float right
+        margin-right 2%
+        margin-top -8px
+    display inline-block
+    position relative
+    width 20%
+    // background-color #444444
+    vertical-align top
+    // padding-left 5%
+    // padding-top 40px
+    @media $tablet-up
+        display inline-block
+        padding-left 2.5%
+        width 9%
+        margin-top 32px
+    @media $desktop-up
+        padding-left 4%
+        width 10%
+
+    // height 66px
+    //padding-top 10px
+    // padding-left 10px
+
+.targetGraphDiv
+    display block
+    position relative
+    vertical-align top
+    //margin-left 4%
+    margin-top 8px
+    height 25px
+    @media $tablet-up
+        height 46px
+    // color: rgb(151, 176, 201)
+    color white
+    .targetGraph
+        font-weight 700
+        text-align center
+        font-size 22px
+        @media $tablet-up
+            font-size 25px
+        @media $desktop-up
+            font-size 32px
+        vertical-align bottom
+        letter-spacing -.5px
+
+
+.graphLabel
+    text-align center
+    color #647383
+    font-size 9px
+    line-height 10px
+    font-weight 400
+    letter-spacing .75px
+    margin-top 6px
+    @media $tablet-up
+        font-size 10px
+        line-height 12px
+        margin-top 9px
+
+
+.weekGraphSVG
+    width 100%
+    width 80px
+    height 80px
+    margin-top 12px
+    margin-left 20px
+    overflow visible
+    margin-bottom 16px
+
+.weekGraphPoint
+    opacity .6
+    cursor pointer
+    transition opacity .4s linear
+    &:hover
+        opacity 1
+
+
+.weekGraphHoverWrapper
+    width 80px
+    height 80px
+    margin-left 20px
+    margin-top 12px
+
+.statHover2
+    position absolute
+    opacity 0
+    height 16px
+    display none
+    //padding 0px 6px
+    background-color #32363b
+    text-align center
+    width 80px
+    transform translateX(-40px)
+    transition opacity .4s linear
+    p
+        line-height 16px
+        margin 0
+        font-size 11px
+        letter-spacing .5px
+        font-weight 300
+
+.hoverOpaque
+    opacity 1
+    display block
+
+.downCaret2
+    position absolute
+    top 15px
+    left 34px
+    width 0
+    height 0
+    border-top 6px solid #32363b
+    border-right 6px solid transparent
+    border-left 6px solid transparent
+
+
+.weekGraphLabel
+    font-size 12px
+    color #647383
+    font-weight 400
+    text-align center
+    width 80px
+    margin-left 20px
+    line-height 4px
+
+//
+// html{
+//     height: 100%;
+//     margin: 0;
+//     padding: 0;
+// }
+//
+// body{
+//     height: 100%;
+//     margin: 0;
+//     padding: 0;
+// }
+//
+// #wrapper
+//     height 100%
+
+.gridlines
+    @media $phone-down
+        display none
+    position fixed
+    z-index -2
+    top 0
+    min-height 100%
+    width 200px
+    display block
+    // background-color #33333a
+
+.gridline
+    display inline-block
+    position absolute
+    z-index -2
+    top 0
+    min-height 100%
+    width 2px
+    margin-right 20px
+    background-color #24282D
+    top 0
+    opacity .5
+
+
+
+
+
+
+.ARI
+    .playerNameWrapperDiv
+        .playerInfo
+            color $red
+    svg
+        rect
+            fill $red
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $red
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $red
+
+.ATL
+    .playerNameWrapperDiv
+        .playerInfo
+            color $berry
+    svg
+        rect
+            fill $berry
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $berry
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $berry
+
+
+.BAL
+    .playerNameWrapperDiv
+        .playerInfo
+            color $purple
+    svg
+        rect
+            fill $purple
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $purple
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $purple
+
+.BUF
+    .playerNameWrapperDiv
+        .playerInfo
+            color $royalBlue
+    svg
+        rect
+            fill $royalBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $royalBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $royalBlue
+
+.CAR
+    .playerNameWrapperDiv
+        .playerInfo
+            color $lightBlue
+    svg
+        rect
+            fill $lightBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $lightBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $lightBlue
+
+.CHI
+    .playerNameWrapperDiv
+        .playerInfo
+            color $orange
+    svg
+        rect
+            fill $orange
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $orange
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $orange
+
+.CIN
+    .playerNameWrapperDiv
+        .playerInfo
+            color $orange
+    svg
+        rect
+            fill $orange
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $orange
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $orange
+
+.CLE
+    .playerNameWrapperDiv
+        .playerInfo
+            color $orange
+    svg
+        rect
+            fill $orange
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $orange
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $orange
+
+.DAL
+    .playerNameWrapperDiv
+        .playerInfo
+            color $royalBlue
+    svg
+        rect
+            fill $royalBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $royalBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $royalBlue
+
+.DEN
+    .playerNameWrapperDiv
+        .playerInfo
+            color $orange
+    svg
+        rect
+            fill $orange
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $orange
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $orange
+
+.DET
+    .playerNameWrapperDiv
+        .playerInfo
+            color $lightBlue
+    svg
+        rect
+            fill $lightBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $lightBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $lightBlue
+
+.GB
+    .playerNameWrapperDiv
+        .playerInfo
+            color $yellow
+    svg
+        rect
+            fill $yellow
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $yellow
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $yellow
+
+.HOU
+    .playerNameWrapperDiv
+        .playerInfo
+            color $red
+    svg
+        rect
+            fill $red
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $red
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $red
+
+.IND
+    .playerNameWrapperDiv
+        .playerInfo
+            color $royalBlue
+    svg
+        rect
+            fill $royalBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $royalBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $royalBlue
+
+.JAX
+    .playerNameWrapperDiv
+        .playerInfo
+            color $teal
+    svg
+        rect
+            fill $teal
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $teal
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $teal
+
+.KC
+    .playerNameWrapperDiv
+        .playerInfo
+            color $red
+    svg
+        rect
+            fill $red
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $red
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $red
+
+.MIA
+    .playerNameWrapperDiv
+        .playerInfo
+            color $teal
+    svg
+        rect
+            fill $teal
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $teal
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $teal
+
+.MIN
+    .playerNameWrapperDiv
+        .playerInfo
+            color $purple
+    svg
+        rect
+            fill $purple
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $purple
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $purple
+
+.NE
+    .playerNameWrapperDiv
+        .playerInfo
+            color $red
+    svg
+        rect
+            fill $red
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $red
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $red
+
+.NO
+    .playerNameWrapperDiv
+        .playerInfo
+            color $gold
+    svg
+        rect
+            fill $gold
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $gold
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $gold
+
+.NYG
+    .playerNameWrapperDiv
+        .playerInfo
+            color $royalBlue
+    svg
+        rect
+            fill $royalBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $royalBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $royalBlue
+
+.NYJ
+    .playerNameWrapperDiv
+        .playerInfo
+            color $forestGreen
+    svg
+        rect
+            fill $forestGreen
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $forestGreen
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $forestGreen
+
+.OAK
+    .playerNameWrapperDiv
+        .playerInfo
+            color $gray
+    svg
+        rect
+            fill $gray
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $gray
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $gray
+
+.PHI
+    .playerNameWrapperDiv
+        .playerInfo
+            color $forestGreen
+    svg
+        rect
+            fill $forestGreen
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $forestGreen
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $forestGreen
+
+.PIT
+    .playerNameWrapperDiv
+        .playerInfo
+            color $yellow
+    svg
+        rect
+            fill $yellow
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $yellow
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $yellow
+
+.SD
+    .playerNameWrapperDiv
+        .playerInfo
+            color $lightBlue
+    svg
+        rect
+            fill $lightBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $lightBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $lightBlue
+
+.SF
+    .playerNameWrapperDiv
+        .playerInfo
+            color $red
+    svg
+        rect
+            fill $red
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $red
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $red
+
+.SEA
+    .playerNameWrapperDiv
+        .playerInfo
+            color $lightGreen
+    svg
+        rect
+            fill $lightGreen
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $lightGreen
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $lightGreen
+
+.LAR
+    .playerNameWrapperDiv
+        .playerInfo
+            color $gold
+    svg
+        rect
+            fill $gold
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $gold
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $gold
+
+.LA
+    .playerNameWrapperDiv
+        .playerInfo
+            color $gold
+    svg
+        rect
+            fill $gold
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $gold
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $gold
+
+.TB
+    .playerNameWrapperDiv
+        .playerInfo
+            color $berry
+    svg
+        rect
+            fill $berry
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $berry
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $berry
+
+.TEN
+    .playerNameWrapperDiv
+        .playerInfo
+            color $lightBlue
+    svg
+        rect
+            fill $lightBlue
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $lightBlue
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $lightBlue
+
+.WSH
+    .playerNameWrapperDiv
+        .playerInfo
+            color $yellow
+    svg
+        rect
+            fill $yellow
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $yellow
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $yellow
+
+.playerDivGeneric1
+    .playerNameWrapperDiv
+        .playerInfo
+            color $generic1
+    svg
+        rect
+            fill $generic1
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $generic1
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $generic1
+
+.playerDivGeneric2
+    .playerNameWrapperDiv
+        .playerInfo
+            color $generic2
+    svg
+        rect
+            fill $generic2
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $generic2
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $generic2
+
+
+
+
+
+
+
+
+.featuredStatRect
+    fill white

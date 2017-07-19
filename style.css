@@ -1,0 +1,1196 @@
+.theDiv {
+  display: inline-block;
+}
+h1 {
+  color: #f00;
+}
+body {
+  background-color: #1a1e23;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+}
+@media screen and (min-width: 768px) {
+  body {
+    padding-right: 40px;
+    padding-left: 40px;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  #heroWrapper {
+    width: calc(100% + 16px);
+    margin-left: -40px;
+    height: 32px;
+    padding-left: 64px;
+    padding-top: 8px;
+    font-size: 16px;
+    background-color: #434a55;
+  }
+  #heroWrapper #weeks {
+    opacity: 0.8;
+  }
+  #heroWrapper #weeks,
+  #heroWrapper #year {
+    font-weight: 700;
+  }
+  #heroWrapper #weeks,
+  #heroWrapper #filters,
+  #heroWrapper #year {
+    display: inline-block;
+    margin-right: 30px;
+  }
+  #heroWrapper #filters,
+  #heroWrapper #year {
+    opacity: 0.4;
+  }
+  #heroWrapper #year {
+    font-weight: 800;
+  }
+  #heroWrapper #filters {
+    font-weight: 400;
+  }
+  #heroWrapper #configureText {
+    float: right;
+    margin-right: 60px;
+    display: inline block;
+    opacity: 0.6;
+    position: relative;
+    z-index: 95;
+  }
+  #heroWrapper #configureIcon {
+    position: fixed;
+    text-align: center;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 28px;
+    padding: 6px;
+    background-color: #434a55;
+    opacity: 0.6;
+    cursor: pointer;
+    z-index: 95;
+  }
+  #heroWrapper #configureIcon:hover {
+    opacity: 1;
+  }
+  #heroWrapper #configureIcon #configureIconImg {
+    position: relative;
+    width: 70%;
+  }
+}
+#inactiveOverlay {
+  width: 120%;
+  height: 120%;
+  position: fixed;
+  left: -10%;
+  top: -10%;
+  background-color: #0b0d12;
+  opacity: 0.7;
+  z-index: 85;
+}
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+#configPanel {
+  width: 180px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(67,74,85,0.8);
+  z-index: 90;
+  transition: right 0.3s ease-in-out;
+}
+#configWrapper {
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 60px;
+  color: #a2a7ae;
+  font-size: 12px;
+}
+#configWrapper select,
+#configWrapper input {
+  background-color: #fff;
+}
+@media screen and (min-width: 768px) {
+  #configWrapper .configName {
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+#configWrapper #configPosition input {
+  margin-right: 4px;
+}
+#configWrapper #configPosition label {
+  margin-right: 6px;
+}
+#configWrapper .checkboxWrapper {
+  display: inline-block;
+}
+@media screen and (min-width: 768px) {
+  #configWrapper .configOptions {
+    margin-bottom: 32px;
+  }
+}
+#configWrapper #configWeeksWrapper p {
+  margin: 0;
+}
+#configWrapper #configWeeksWrapper select,
+#configWrapper #configWeeksWrapper p {
+  display: inline-block;
+  margin-right: 6px;
+}
+#configWrapper #configWeeksWrapper select {
+  min-width: 36px;
+}
+#configWrapper #updatePage {
+  padding: 6px 18px;
+  font-size: 14px;
+  background-color: #0071bc;
+  border: none;
+  border-radius: 3px;
+  font-weight: 700;
+  cursor: pointer;
+  display: block;
+  width: auto;
+  text-align: center;
+  width: 60px;
+  color: #fff;
+}
+#configWrapper #updatePage:hover {
+  opacity: 0.8;
+}
+.configPanelOpen {
+  right: 0;
+}
+.configPanelClosed {
+  right: -181px;
+}
+#wrapper {
+  padding-top: 60px;
+}
+.playerDiv {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 162px;
+  margin-bottom: 14px;
+}
+@media screen and (min-width: 768px) {
+  .playerDiv {
+    height: 136px;
+    margin-bottom: 21px;
+  }
+}
+.playerDivBG {
+  position: absolute;
+  width: 100%;
+  height: 162px;
+  background-color: #0b0d12;
+  opacity: 0.3;
+  z-index: -1;
+}
+@media screen and (min-width: 768px) {
+  .playerDivBG {
+    height: 136px;
+  }
+}
+.playerRank {
+  position: absolute;
+  left: 12px;
+  top: 9px;
+  opacity: 0.5;
+  font-weight: bold;
+  color: #97b0c9;
+}
+@media screen and (min-width: 768px) {
+  .playerRank {
+    left: 17px;
+    top: 40%;
+    opacity: 0.33;
+  }
+}
+.playerNameWrapperDiv {
+  position: relative;
+  width: 80%;
+  margin-top: 8px;
+  margin-left: 40px;
+  margin-right: 2%;
+  display: inline-block;
+  vertical-align: top;
+}
+@media screen and (min-width: 768px) {
+  .playerNameWrapperDiv {
+    width: 18%;
+    margin-left: 5%;
+    margin-top: 12px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .playerNameWrapperDiv {
+    width: 20%;
+    margin-left: 3%;
+    margin-top: 8px;
+  }
+}
+.playerInitialsWrapper {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  margin-top: 14px;
+  display: none;
+}
+@media screen and (min-width: 992px) {
+  .playerInitialsWrapper {
+    display: block;
+  }
+}
+.playerInitials {
+  font-size: 98px;
+  display: none;
+  padding: 0;
+  line-height: 82px;
+  text-align: center;
+  margin: 0;
+  color: #0a0f14;
+  opacity: 0.5;
+  font-weight: 700;
+  letter-spacing: -6px;
+}
+@media screen and (min-width: 768px) {
+  .playerInitials {
+    font-size: 80px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .playerInitials {
+    font-size: 98px;
+    display: block;
+  }
+}
+.playerName {
+  text-align: center;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin: 0;
+  margin-right: 4px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 768px) {
+  .playerName {
+    display: block;
+    margin-right: 0;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 2px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .playerName {
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 3px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .playerFirstName {
+    margin-top: 28px;
+  }
+}
+.playerInfo {
+  margin-left: 10px;
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 3px;
+}
+@media screen and (min-width: 768px) {
+  .playerInfo {
+    margin-left: 0;
+    display: block;
+    width: 100%;
+  }
+}
+.statNameDiv {
+  display: inline-block;
+  padding-top: 6px;
+  margin-right: 7px;
+}
+@media screen and (max-width: 768px) {
+  .statNameDiv {
+    margin-left: 14px;
+    padding-top: 2px;
+    float: left;
+  }
+}
+.statNameP {
+  font-size: 10px;
+  line-height: 7px;
+  text-transform: uppercase;
+  text-align: right;
+  font-weight: 400;
+  color: #647383;
+  transition: all 0.4s linear;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .statNameP {
+    letter-spacing: 0.75px;
+    font-size: 9px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .statNameP {
+    font-size: 10px;
+  }
+}
+.statNameP.focusP {
+  font-weight: 600;
+  color: #a2a7ae;
+}
+.statDiv {
+  width: 40%;
+  padding-top: 12px;
+  vertical-align: top;
+  display: inline-block;
+}
+@media screen and (max-width: 768px) {
+  .statDiv {
+    float: left;
+  }
+}
+@media screen and (min-width: 768px) {
+  .statDiv {
+    width: 33%;
+    padding-top: 16px;
+  }
+}
+.singleStatDivWrapper {
+  height: 16px;
+  display: block;
+  transition: height 0.4s linear;
+  cursor: pointer;
+}
+.thirtyTall {
+  height: 26px;
+}
+.thirtyTall .avgCircle {
+  display: block !important;
+}
+.singleStat {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(10,15,20,0.8);
+  position: relative;
+  cursor: pointer;
+  transition: margin-bottom 0.4s linear;
+}
+.singleStat .valNum {
+  display: none;
+}
+.singleStat .valNumTight {
+  color: #444;
+}
+.singleStat .valNumTight:hover {
+  color: #fff;
+  z-index: 100;
+}
+.singleStat .opaque {
+  opacity: 0;
+  display: block;
+  transition: opacity 0.8s linear;
+}
+svg {
+  float: left;
+}
+.statHover {
+  position: absolute;
+  height: 16px;
+  background-color: #32363b;
+  top: -33px;
+  text-align: center;
+  width: 90px;
+  transform: translateX(-32px);
+}
+.statHover p {
+  line-height: 16px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+.downCaret {
+  position: absolute;
+  top: 15px;
+  left: 35px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid #32363b;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+.valNum {
+  position: absolute;
+  height: 16px;
+  top: 10px;
+  text-align: center;
+  width: 26px;
+  transform: translateX(-13px);
+  opacity: 0.5;
+}
+.valNum p {
+  line-height: 10px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: -0.4px;
+  font-weight: 300;
+}
+.valNum p div {
+  display: none;
+}
+.valNum p:hover div {
+  display: block;
+}
+.valNum .statHover p {
+  line-height: 16px;
+}
+.labelNumDiv {
+  position: absolute;
+  width: 24px;
+  top: -4px;
+  transition: opacity 0.3s linear;
+}
+.labelNumDiv p {
+  line-height: 16px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  text-align: center;
+  color: #97b0c9;
+  opacity: 0.6;
+}
+.labelNumRight {
+  transform: translateX(2px);
+}
+.labelNumLeft {
+  transform: translateX(-24px);
+}
+.opaque {
+  opacity: 0;
+  display: block;
+  margin-bottom: 24px;
+  transition: opacity 0.5s linear;
+}
+.nonFocus {
+  opacity: 0.7;
+  transition: opacity 0.4s ease-out;
+}
+.nonFocus .avgCircle {
+  display: none;
+}
+.avgCircle {
+  width: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  background-color: #fff;
+  opacity: 0.65;
+  position: absolute;
+  top: 0;
+}
+.avgCircle .avgPWrapper {
+  display: none;
+  position: absolute;
+  height: 16px;
+  background-color: #32363b;
+  top: -20px;
+  text-align: center;
+  width: 90px;
+  transform: translateX(-50%);
+}
+.avgCircle .avgPWrapper p {
+  line-height: 16px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+.avgCircle:hover {
+  opacity: 1;
+}
+.avgCircle:hover .avgPWrapper {
+  display: block;
+}
+.moreTransp {
+  opacity: 0.12;
+}
+.statSpacer {
+  width: 100%;
+  height: 13px;
+  background-color: #494;
+}
+.weekGraphBar {
+  display: inline-block;
+  background-color: #f00;
+  position: absolute;
+  width: 6px;
+  bottom: 0;
+  min-height: 3px;
+  transition: height 0.5s ease;
+  cursor: pointer;
+}
+.weekGraphBar:hover {
+  opacity: 1 !important;
+}
+.weekGraphBar:hover .statHover {
+  display: block;
+}
+.weekGraphBar .statHover {
+  display: none;
+  transform: translateX(-36px);
+  z-index: 90;
+  top: -26px;
+}
+.weekGraphHR {
+  border-color: #647383;
+  position: absolute;
+  bottom: 5px;
+  margin: 0;
+  left: 50%;
+  z-index: -1;
+  opacity: 0.5;
+  display: none;
+}
+.weekGraphDivWrapper {
+  display: inline-block;
+  position: relative;
+  width: 20%;
+  vertical-align: top;
+}
+@media screen and (max-width: 768px) {
+  .weekGraphDivWrapper {
+    float: right;
+    margin-right: 2%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .weekGraphDivWrapper {
+    padding-left: 3%;
+    width: 9%;
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .weekGraphDivWrapper {
+    padding-left: 4%;
+    width: 10%;
+  }
+}
+.weekGraphDiv {
+  display: block;
+  position: relative;
+  vertical-align: top;
+  height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .weekGraphDiv {
+    height: 66px;
+  }
+}
+.targetGraphDivWrapper {
+  display: inline-block;
+  position: relative;
+  width: 20%;
+  vertical-align: top;
+}
+@media screen and (max-width: 768px) {
+  .targetGraphDivWrapper {
+    float: right;
+    margin-right: 2%;
+    margin-top: -8px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .targetGraphDivWrapper {
+    display: inline-block;
+    padding-left: 2.5%;
+    width: 9%;
+    margin-top: 32px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .targetGraphDivWrapper {
+    padding-left: 4%;
+    width: 10%;
+  }
+}
+.targetGraphDiv {
+  display: block;
+  position: relative;
+  vertical-align: top;
+  margin-top: 8px;
+  height: 25px;
+  color: #fff;
+}
+@media screen and (min-width: 768px) {
+  .targetGraphDiv {
+    height: 46px;
+  }
+}
+.targetGraphDiv .targetGraph {
+  font-weight: 700;
+  text-align: center;
+  font-size: 22px;
+  vertical-align: bottom;
+  letter-spacing: -0.5px;
+}
+@media screen and (min-width: 768px) {
+  .targetGraphDiv .targetGraph {
+    font-size: 25px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .targetGraphDiv .targetGraph {
+    font-size: 32px;
+  }
+}
+.graphLabel {
+  text-align: center;
+  color: #647383;
+  font-size: 9px;
+  line-height: 10px;
+  font-weight: 400;
+  letter-spacing: 0.75px;
+  margin-top: 6px;
+}
+@media screen and (min-width: 768px) {
+  .graphLabel {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 9px;
+  }
+}
+.weekGraphSVG {
+  width: 100%;
+  width: 80px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 20px;
+  overflow: visible;
+  margin-bottom: 16px;
+}
+.weekGraphPoint {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.4s linear;
+}
+.weekGraphPoint:hover {
+  opacity: 1;
+}
+.weekGraphHoverWrapper {
+  width: 80px;
+  height: 80px;
+  margin-left: 20px;
+  margin-top: 12px;
+}
+.statHover2 {
+  position: absolute;
+  opacity: 0;
+  height: 16px;
+  display: none;
+  background-color: #32363b;
+  text-align: center;
+  width: 80px;
+  transform: translateX(-40px);
+  transition: opacity 0.4s linear;
+}
+.statHover2 p {
+  line-height: 16px;
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}
+.hoverOpaque {
+  opacity: 1;
+  display: block;
+}
+.downCaret2 {
+  position: absolute;
+  top: 15px;
+  left: 34px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid #32363b;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+.weekGraphLabel {
+  font-size: 12px;
+  color: #647383;
+  font-weight: 400;
+  text-align: center;
+  width: 80px;
+  margin-left: 20px;
+  line-height: 4px;
+}
+.gridlines {
+  position: fixed;
+  z-index: -2;
+  top: 0;
+  min-height: 100%;
+  width: 200px;
+  display: block;
+}
+@media screen and (max-width: 768px) {
+  .gridlines {
+    display: none;
+  }
+}
+.gridline {
+  display: inline-block;
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  min-height: 100%;
+  width: 2px;
+  margin-right: 20px;
+  background-color: #24282d;
+  top: 0;
+  opacity: 0.5;
+}
+.ARI .playerNameWrapperDiv .playerInfo {
+  color: #c1272d;
+}
+.ARI svg rect {
+  fill: #c1272d;
+}
+.ARI .weekGraphDiv .weekGraphBar {
+  background-color: #c1272d;
+}
+.ARI .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c1272d;
+}
+.ATL .playerNameWrapperDiv .playerInfo {
+  color: #c5004b;
+}
+.ATL svg rect {
+  fill: #c5004b;
+}
+.ATL .weekGraphDiv .weekGraphBar {
+  background-color: #c5004b;
+}
+.ATL .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c5004b;
+}
+.BAL .playerNameWrapperDiv .playerInfo {
+  color: #9537b9;
+}
+.BAL svg rect {
+  fill: #9537b9;
+}
+.BAL .weekGraphDiv .weekGraphBar {
+  background-color: #9537b9;
+}
+.BAL .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #9537b9;
+}
+.BUF .playerNameWrapperDiv .playerInfo {
+  color: #0071bc;
+}
+.BUF svg rect {
+  fill: #0071bc;
+}
+.BUF .weekGraphDiv .weekGraphBar {
+  background-color: #0071bc;
+}
+.BUF .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #0071bc;
+}
+.CAR .playerNameWrapperDiv .playerInfo {
+  color: #45c7ff;
+}
+.CAR svg rect {
+  fill: #45c7ff;
+}
+.CAR .weekGraphDiv .weekGraphBar {
+  background-color: #45c7ff;
+}
+.CAR .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #45c7ff;
+}
+.CHI .playerNameWrapperDiv .playerInfo {
+  color: #f7931e;
+}
+.CHI svg rect {
+  fill: #f7931e;
+}
+.CHI .weekGraphDiv .weekGraphBar {
+  background-color: #f7931e;
+}
+.CHI .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #f7931e;
+}
+.CIN .playerNameWrapperDiv .playerInfo {
+  color: #f7931e;
+}
+.CIN svg rect {
+  fill: #f7931e;
+}
+.CIN .weekGraphDiv .weekGraphBar {
+  background-color: #f7931e;
+}
+.CIN .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #f7931e;
+}
+.CLE .playerNameWrapperDiv .playerInfo {
+  color: #f7931e;
+}
+.CLE svg rect {
+  fill: #f7931e;
+}
+.CLE .weekGraphDiv .weekGraphBar {
+  background-color: #f7931e;
+}
+.CLE .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #f7931e;
+}
+.DAL .playerNameWrapperDiv .playerInfo {
+  color: #0071bc;
+}
+.DAL svg rect {
+  fill: #0071bc;
+}
+.DAL .weekGraphDiv .weekGraphBar {
+  background-color: #0071bc;
+}
+.DAL .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #0071bc;
+}
+.DEN .playerNameWrapperDiv .playerInfo {
+  color: #f7931e;
+}
+.DEN svg rect {
+  fill: #f7931e;
+}
+.DEN .weekGraphDiv .weekGraphBar {
+  background-color: #f7931e;
+}
+.DEN .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #f7931e;
+}
+.DET .playerNameWrapperDiv .playerInfo {
+  color: #45c7ff;
+}
+.DET svg rect {
+  fill: #45c7ff;
+}
+.DET .weekGraphDiv .weekGraphBar {
+  background-color: #45c7ff;
+}
+.DET .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #45c7ff;
+}
+.GB .playerNameWrapperDiv .playerInfo {
+  color: #fcde21;
+}
+.GB svg rect {
+  fill: #fcde21;
+}
+.GB .weekGraphDiv .weekGraphBar {
+  background-color: #fcde21;
+}
+.GB .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #fcde21;
+}
+.HOU .playerNameWrapperDiv .playerInfo {
+  color: #c1272d;
+}
+.HOU svg rect {
+  fill: #c1272d;
+}
+.HOU .weekGraphDiv .weekGraphBar {
+  background-color: #c1272d;
+}
+.HOU .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c1272d;
+}
+.IND .playerNameWrapperDiv .playerInfo {
+  color: #0071bc;
+}
+.IND svg rect {
+  fill: #0071bc;
+}
+.IND .weekGraphDiv .weekGraphBar {
+  background-color: #0071bc;
+}
+.IND .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #0071bc;
+}
+.JAX .playerNameWrapperDiv .playerInfo {
+  color: #00c1cf;
+}
+.JAX svg rect {
+  fill: #00c1cf;
+}
+.JAX .weekGraphDiv .weekGraphBar {
+  background-color: #00c1cf;
+}
+.JAX .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #00c1cf;
+}
+.KC .playerNameWrapperDiv .playerInfo {
+  color: #c1272d;
+}
+.KC svg rect {
+  fill: #c1272d;
+}
+.KC .weekGraphDiv .weekGraphBar {
+  background-color: #c1272d;
+}
+.KC .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c1272d;
+}
+.MIA .playerNameWrapperDiv .playerInfo {
+  color: #00c1cf;
+}
+.MIA svg rect {
+  fill: #00c1cf;
+}
+.MIA .weekGraphDiv .weekGraphBar {
+  background-color: #00c1cf;
+}
+.MIA .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #00c1cf;
+}
+.MIN .playerNameWrapperDiv .playerInfo {
+  color: #9537b9;
+}
+.MIN svg rect {
+  fill: #9537b9;
+}
+.MIN .weekGraphDiv .weekGraphBar {
+  background-color: #9537b9;
+}
+.MIN .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #9537b9;
+}
+.NE .playerNameWrapperDiv .playerInfo {
+  color: #c1272d;
+}
+.NE svg rect {
+  fill: #c1272d;
+}
+.NE .weekGraphDiv .weekGraphBar {
+  background-color: #c1272d;
+}
+.NE .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c1272d;
+}
+.NO .playerNameWrapperDiv .playerInfo {
+  color: #e3c48f;
+}
+.NO svg rect {
+  fill: #e3c48f;
+}
+.NO .weekGraphDiv .weekGraphBar {
+  background-color: #e3c48f;
+}
+.NO .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #e3c48f;
+}
+.NYG .playerNameWrapperDiv .playerInfo {
+  color: #0071bc;
+}
+.NYG svg rect {
+  fill: #0071bc;
+}
+.NYG .weekGraphDiv .weekGraphBar {
+  background-color: #0071bc;
+}
+.NYG .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #0071bc;
+}
+.NYJ .playerNameWrapperDiv .playerInfo {
+  color: #1c9f13;
+}
+.NYJ svg rect {
+  fill: #1c9f13;
+}
+.NYJ .weekGraphDiv .weekGraphBar {
+  background-color: #1c9f13;
+}
+.NYJ .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #1c9f13;
+}
+.OAK .playerNameWrapperDiv .playerInfo {
+  color: #8699a6;
+}
+.OAK svg rect {
+  fill: #8699a6;
+}
+.OAK .weekGraphDiv .weekGraphBar {
+  background-color: #8699a6;
+}
+.OAK .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #8699a6;
+}
+.PHI .playerNameWrapperDiv .playerInfo {
+  color: #1c9f13;
+}
+.PHI svg rect {
+  fill: #1c9f13;
+}
+.PHI .weekGraphDiv .weekGraphBar {
+  background-color: #1c9f13;
+}
+.PHI .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #1c9f13;
+}
+.PIT .playerNameWrapperDiv .playerInfo {
+  color: #fcde21;
+}
+.PIT svg rect {
+  fill: #fcde21;
+}
+.PIT .weekGraphDiv .weekGraphBar {
+  background-color: #fcde21;
+}
+.PIT .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #fcde21;
+}
+.SD .playerNameWrapperDiv .playerInfo {
+  color: #45c7ff;
+}
+.SD svg rect {
+  fill: #45c7ff;
+}
+.SD .weekGraphDiv .weekGraphBar {
+  background-color: #45c7ff;
+}
+.SD .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #45c7ff;
+}
+.SF .playerNameWrapperDiv .playerInfo {
+  color: #c1272d;
+}
+.SF svg rect {
+  fill: #c1272d;
+}
+.SF .weekGraphDiv .weekGraphBar {
+  background-color: #c1272d;
+}
+.SF .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c1272d;
+}
+.SEA .playerNameWrapperDiv .playerInfo {
+  color: #7de82c;
+}
+.SEA svg rect {
+  fill: #7de82c;
+}
+.SEA .weekGraphDiv .weekGraphBar {
+  background-color: #7de82c;
+}
+.SEA .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #7de82c;
+}
+.LAR .playerNameWrapperDiv .playerInfo {
+  color: #e3c48f;
+}
+.LAR svg rect {
+  fill: #e3c48f;
+}
+.LAR .weekGraphDiv .weekGraphBar {
+  background-color: #e3c48f;
+}
+.LAR .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #e3c48f;
+}
+.LA .playerNameWrapperDiv .playerInfo {
+  color: #e3c48f;
+}
+.LA svg rect {
+  fill: #e3c48f;
+}
+.LA .weekGraphDiv .weekGraphBar {
+  background-color: #e3c48f;
+}
+.LA .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #e3c48f;
+}
+.TB .playerNameWrapperDiv .playerInfo {
+  color: #c5004b;
+}
+.TB svg rect {
+  fill: #c5004b;
+}
+.TB .weekGraphDiv .weekGraphBar {
+  background-color: #c5004b;
+}
+.TB .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #c5004b;
+}
+.TEN .playerNameWrapperDiv .playerInfo {
+  color: #45c7ff;
+}
+.TEN svg rect {
+  fill: #45c7ff;
+}
+.TEN .weekGraphDiv .weekGraphBar {
+  background-color: #45c7ff;
+}
+.TEN .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #45c7ff;
+}
+.WSH .playerNameWrapperDiv .playerInfo {
+  color: #fcde21;
+}
+.WSH svg rect {
+  fill: #fcde21;
+}
+.WSH .weekGraphDiv .weekGraphBar {
+  background-color: #fcde21;
+}
+.WSH .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #fcde21;
+}
+.playerDivGeneric1 .playerNameWrapperDiv .playerInfo {
+  color: #3fc081;
+}
+.playerDivGeneric1 svg rect {
+  fill: #3fc081;
+}
+.playerDivGeneric1 .weekGraphDiv .weekGraphBar {
+  background-color: #3fc081;
+}
+.playerDivGeneric1 .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #3fc081;
+}
+.playerDivGeneric2 .playerNameWrapperDiv .playerInfo {
+  color: #00a99d;
+}
+.playerDivGeneric2 svg rect {
+  fill: #00a99d;
+}
+.playerDivGeneric2 .weekGraphDiv .weekGraphBar {
+  background-color: #00a99d;
+}
+.playerDivGeneric2 .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #00a99d;
+}
+.featuredStatRect {
+  fill: #fff;
+}

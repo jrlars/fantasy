@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta content="utf-8" http-equiv="encoding">
+
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="scripts.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="heroWrapper">
+        <div id="hero">
+            <div id="weeks">
+                WEEK X - WEEK Y
+            </div>
+            <div id="year">
+                2016
+            </div>
+            <div id="filters">
+                TOP X POSITION BY AVERAGE STANDARD POINTS
+            </div>
+            <div id="configureText">
+                CONFIGURE
+            </div>
+            <div id="configureIcon">
+                <img id="configureIconImg" src="configure.png"/>
+            </div>
+        </div>
+    </div>
+    <div id="inactiveOverlay" class="hidden"></div>
+    <div id="configPanel" class="configPanelClosed">
+        <div id="configWrapper">
+            <div class="configName" id="configPositionLabel">
+                POSITION
+            </div>
+            <div id="configPositionWrapper" class="configOptions">
+                <!-- <legend>Please select one of the following</legend> -->
+                <div class="checkboxWrapper"><input class="configInput configConfig" type="checkbox" name="rb" id="configRB" value="RB" checked/><label for="rb">RB</label></div>
+                <div class="checkboxWrapper"><input class="configInput configConfig" type="checkbox" name="wr" id="configWR" value="WR" /><label for="wr">WR</label></div>
+                <div class="checkboxWrapper"><input class="configInput configConfig" type="checkbox" name="te" id="configTE" value="TE" /><label for="te">TE</label></div>
+            </div>
+
+            <div class="configName" id="configNumberLabel">
+                NUMBER
+            </div>
+            <div id="configNumberWrapper" class="configOptions">
+                <select class="configConfig" id="configNumber">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="75">75</option>
+                </select>
+            </div>
+
+            <div class="configName" id="configWeeksLabel">
+                WEEKS
+            </div>
+            <div id="configWeeksWrapper" class="configOptions">
+                <select class="configConfig" id="configStartWeek">
+
+                </select>
+                <p>
+                    TO
+                </p>
+                <select class="configConfig" id="configEndWeek">
+
+                </select>
+            </div>
+
+            <!-- <div class="configName" id="configScoringLabel">
+                SCORING
+            </div>
+            <div id="configScoringWrapper" class="configOptions">
+                <select class="configConfig" id="configScoring">
+                    <option value="standard">Standard</option>
+                    <option value="half">.5 PPR</option>
+                    <option value="ppr">PPR</option>
+                </select>
+            </div> -->
+
+            <div id="configColorsWrapper" class="configOptions">
+                <div class="checkboxWrapper"><input class="configInput configConfig" type="checkbox" name="colors" id="configColors" value="0" checked/><label for="colors">TEAM COLORS</label></div>
+            </div>
+
+            <div id="updatePage">UPDATE</div>
+        </div>
+    </div>
+    <div id="wrapper">
+
+    </div>
+</body>
+</html>
