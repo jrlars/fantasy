@@ -92,7 +92,6 @@ var pageLoadNum = 0;
     function castPlayerInfo(inArr){
         var tempPlayerInfo = inArr;
         for(var z=0;z<playerInfo.length;z++){
-            //console.log(playerInfo);
             playerInfo[z].attempts = parseInt(tempPlayerInfo[z].attempts);
             playerInfo[z].completions = parseInt(tempPlayerInfo[z].completions);
             playerInfo[z].fumbles = parseInt(tempPlayerInfo[z].fumbles);
@@ -140,7 +139,6 @@ var pageLoadNum = 0;
         var tempWeek = startWeek;
         console.log(startWeek + " startweek");
         console.log(endWeek + " endweek");
-        console.log(input);
         //var tempPlayer = input[0].playerName;
         var tempPlayer = "";
         var byeFlag = 0;
@@ -154,17 +152,12 @@ var pageLoadNum = 0;
             ///////// LOGIC
 
             if(input[i].playerName!=tempPlayer){
-                console.log(input[i].playerName);
                 tempPlayer = input[i].playerName;
                 tempWeek = startWeek;
             }
 
-
-            // console.log(currentWeek);
-            console.log(tempWeek);
             if(currentWeek!=(tempWeek+"")){
                 //BYE WEEK LOGIC
-                console.log("BYE WEEK " + tempWeek);
                 byeFlag = 1;
             }
 
@@ -172,26 +165,14 @@ var pageLoadNum = 0;
                 if(input[(i+1)].playerName!=tempPlayer){
                     //next is first week of next player - need to check for last week bye
                     if(currentWeek!=week){
-                        console.log("BYE WEEK " + week);
                         byeFlag = 2;
                     }
                 }
             }else if(i==input.length-1){
                 if(currentWeek!=week){
-                    console.log("BYE WEEK " + week);
                     byeFlag = 2;
                 }
             }
-
-
-            // if(currentWeek!=(tempWeek+"")){
-            //     //console.log("BYE WEEK " + tempWeek);
-            //     tempWeek++;
-            //     console.log(tempWeek);
-            //     tempWeek++;
-            // }else{
-            //     tempWeek++;
-            // }
 
             if(byeFlag==1){
                 var byeWeek = {"val":0,"vs":"BYE","week":(""+tempWeek)};
@@ -361,8 +342,6 @@ var pageLoadNum = 0;
 
                 if(i!=0){
 
-                    // tempWeek = startWeek;
-
                     var sortedPoints = currentPoints.slice(0);
                     sortedPoints.sort(function(x, y){
                         return d3.ascending(x.val, y.val);
@@ -458,9 +437,7 @@ var pageLoadNum = 0;
                 currentObject.initials = playerInitials;
                 currentObject.position = input[i].position;
                 currentObject.team = input[i].team.toUpperCase();
-                //currentObject.stats = [];
 
-                //console.log(playerInitials);
 
 
 
@@ -574,15 +551,10 @@ function renderPage(dataArr){
 
     //updateHeader();
 
-    //console.log("dataArr");
-    //console.log(dataArr);
-
     var testArray = d3.select(dataArr).sort(d3.ascending(function(d,i) {
         console.log("sorting");
         return d[i].stats[0].values[5].val;
     }))
-    //console.log(testArray);
-    //console.log(dataArr);
 
     playerDiv = d3.select("#wrapper").selectAll("div")
     .data(dataArr)
@@ -698,42 +670,24 @@ function renderPage(dataArr){
     statSVG.each(function(d){
         stats = d3.select(this)
         .selectAll("rect")
-        // .data(d.values)
         .data(function(){
-            //console.log(d.values);
             tempValues = d.values;
-            //tempValues = JSON.parse(JSON.stringify(d.values));
-            //console.log(tempValues);
-            //tempValues = jQuery.extend(true, {}, d.values);
+
             var byeIndex = -1;
             for(var key in tempValues){
                 if (tempValues.hasOwnProperty(key)) {
-                    // console.log(key);
-                    // console.log(d.values[key]);
                     if(tempValues[key].vs=="BYE"){
                         byeIndex = key;
                     }
                 }
             }
-            //console.log(byeIndex);
-            // delete d.values[key];
-
-            // if (byeIndex > -1) {
-            //     tempValues.splice(byeIndex, 1);
-            // }
-
-            //console.log(tempValues);
-            //console.log(d.values);
             return tempValues;
         })
         .enter()
         .append("rect")
         .attr("width", function(values, i){
             var maxVal = d.maxVal;
-            // console.log("values");
-            // console.log(values);
-            // console.log("d");
-            // console.log(d);
+
             var widthVal = "0%";
             //console.log(tempValues);
             if(tempValues[i+1]){
@@ -748,7 +702,7 @@ function renderPage(dataArr){
                     widthVal = "0%";
                 }
             }else{
-                //console.log("endval");
+
                 this.remove();
             };
 
@@ -811,33 +765,29 @@ function renderPage(dataArr){
     //     .selectAll("rect")
     //     // .data(d.values)
     //     .data(function(){
-    //         //console.log(d.values);
+
     //         var byeIndex = -1;
     //         for(var key in d.values){
     //             if (d.values.hasOwnProperty(key)) {
-    //                 // console.log(key);
-    //                 // console.log(d.values[key]);
+
     //                 if(d.values[key].vs=="BYE"){
     //                     byeIndex = key;
     //                 }
     //             }
     //         }
-    //         console.log(byeIndex);
+
     //         // delete d.values[key];
     //         // if (byeIndex > -1) {
     //         //     d.values.splice(byeIndex, 1);
     //         // }
-    //         console.log(d.values);
+
     //         return d.values;
     //     })
     //     .enter()
     //     .append("rect")
     //     .attr("width", function(values, i){
     //         var maxVal = d.maxVal;
-    //         // console.log("values");
-    //         // console.log(values);
-    //         // console.log("d");
-    //         // console.log(d);
+
     //         var widthVal = "0%";
     //         if(d.values[i+1]){
     //
@@ -846,12 +796,12 @@ function renderPage(dataArr){
     //                 widthVal = "0%";
     //             }
     //         }else{
-    //             //console.log("endval");
+
     //             this.remove();
     //         };
     //
     //         // if(values.vs=="BYE"){
-    //         //     console.log("remove")
+
     //         //     this.remove();
     //         // }
     //         return widthVal;
@@ -985,20 +935,9 @@ function renderPage(dataArr){
 
 
         var sum = d3.sum(d.values, function(d) { return d.val; });
-        // if(d.stat=="Points"){
-        //     console.log(d.values);
-        //     console.log(sum);
-        // }
 
-
-        // var avg = (sum/d.values.length);
-        // console.log("WEEKS " + weeks);
-        // console.log("arr length " + tempArr.length);
-        // var avg = (sum/(weeks));
         var avg = (sum/tempArr.length);
-        // if(d.stat=="Points"){
-        //     console.log(avg);
-        // }
+
 
         d3.select(this).append('div')
             .attr("class", "avgCircle")
@@ -1024,62 +963,32 @@ function renderPage(dataArr){
     /////STARTING WEEK
 
     var weekGraphStart = 0;
-    //var weekGraphDivWrapper;
-
-    // playerDiv.each(function(){
-    //     weekGraphDivWrapper = d3.select(this)
-    //         .append('div')
-    //         .attr('class', 'weekGraphDivWrapper')
-    //         .append('div')
-    //         .attr('class', 'weekGraphDiv');
-    //
-    // });
-
-    // d3.selectAll(".weekGraphDivWrapper").each(function(){
-    //     d3.select(this)
-    //     .append("div")
-    //     .attr("class", "graphLabel weeklyPointsLabel")
-    //     .html("WEEKLY<br>POINTS");
-    // })
 
 
     var weekGraphDivWrapper = playerDiv.append('div')
-        .attr('class', 'weekGraphDivWrapper');
-        // .append('div')
-        // .attr('class', 'targetGraphDiv');
+        .attr('class', function(){
+            if((weeks+1)<=5){
+                return "weekGraphDivWrapper smallWeekGraph";
+            }else if((weeks+1)<=10){
+                return "weekGraphDivWrapper mediumWeekGraph";
+            }else{
+                return "weekGraphDivWrapper";
+            }
+        });
+        // .attr('class', 'weekGraphDivWrapper');
 
     var weekGraphDiv = weekGraphDivWrapper.append('div')
         .attr('class', 'weekGraphDiv');
 
 
-    //var weekGraphDiv = d3.selectAll("div.weekGraphDiv");
-
     var weekGraphBar = weekGraphDiv.selectAll("div.weekGraphBar")
         .data(function(d){
             var valsByWeek = JSON.parse(JSON.stringify(d.stats[0].values));
-
+            console.log(valsByWeek);
+            console.log("between " + weeks);
             valsByWeek.sort(function(x, y){
-                return d3.ascending(x.week, y.week);
+                return d3.ascending(parseInt(x.week), parseInt(y.week));
             });
-            // var startWeek = (week-weeks);
-            // var byeWeek = 0;
-            // for(var i=0;i<valsByWeek.length;i++){
-            //     if(parseInt(valsByWeek[i].week)==startWeek){
-            //
-            //     }else{
-            //         if(startWeek!=0){
-            //             byeWeek = {"val":0,"vs":"BYE","week":(""+startWeek)};
-            //         }
-            //         startWeek++;
-            //     }
-            //     startWeek++;
-            // }
-            // if(byeWeek){
-            //     valsByWeek.push(byeWeek);
-            //     valsByWeek.sort(function(x, y){
-            //         return d3.ascending(x.week, y.week);
-            //     });
-            // }
             console.log(valsByWeek);
             return valsByWeek;
         })
@@ -1089,19 +998,21 @@ function renderPage(dataArr){
             return "weekGraphBar";
         })
         .style("left", function(d,i){
-            var startLeft = (((weeks/2)*-8)+((d.week-(week-weeks))*8));
-            //if((weeks%2)==0){
-                startLeft += -4;
-            //}
-            var realLeft =  "calc(50% + " + startLeft + "px)";
-            return realLeft;
+
+            console.log(i);
+            var tempLeftVal = ((Math.floor((1/(weeks + 1))*100))*i) + "%";
+            console.log(tempLeftVal);
+            return tempLeftVal;
         })
         .style("opacity", function(d){
             var tempOpacity = (.3+((((parseInt(d.week)-(week-weeks))/weeks)*(.7))));
             return tempOpacity;
         })
         .style("width", function(d){
-            return "8px";
+            // return "8px";
+            var tempWeekWidth = Math.floor((1/(weeks + 1))*100) + "%";
+            console.log(tempWeekWidth);
+            return tempWeekWidth;
         })
         .style("height", function(d){
             var tempHeight = (((d.val/maxValArr[weekGraphStart])*100)+"%");
@@ -1155,7 +1066,16 @@ function renderPage(dataArr){
 
 
     var targetGraphDivWrapper = playerDiv.append('div')
-        .attr('class', 'targetGraphDivWrapper');
+        .attr('class', function(){
+            if((weeks+1)<=5){
+                return "targetGraphDivWrapper smallWeekGraph";
+            }else if((weeks+1)<=10){
+                return "targetGraphDivWrapper mediumWeekGraph";
+            }else{
+                return "targetGraphDivWrapper";
+            }
+        });
+        // .attr('class', 'targetGraphDivWrapper');
 
     var targetGraphDiv = targetGraphDivWrapper.append('div')
         .attr('class', 'targetGraphDiv');
@@ -1180,7 +1100,6 @@ function renderPage(dataArr){
         .attr("data", function(stats, i){
             if(i==1){
                 var tempPlayer = d3.select(this.parentNode).datum();
-                //console.log(tempPlayer);
                 var playerTeam = tempPlayer.team;
 
                 var targetsArray = stats.values;
@@ -1233,7 +1152,6 @@ function renderPage(dataArr){
         .html(function(d,i){
 
             if(i==1){
-                //console.log(d3.select(this).attr("data"));
                 return (d3.select(this).attr("data")+"%");
             }else{
                 d3.select(this).remove();
@@ -1585,8 +1503,6 @@ function queryDB(){
         dataCast = castResults(parsed);
         dataArr = createArray(parsed);
         byeArr = createByeArr(dataArr);
-        console.log("INITIAL ARRAY");
-        console.log(dataArr);
 
         dbDoneCheck(1);
 
@@ -1808,15 +1724,15 @@ function loadParameters(){
     }
     if(urlParams['position1']){
         POSITION1 = urlParams['position1'];
-        //console.log("position1=" + POSITION1);
+
     }
     if(urlParams['position2']){
         POSITION2 = urlParams['position2'];
-        //console.log("position2=" + POSITION2);
+
     }
     if(urlParams['position3']){
         POSITION3 = urlParams['position3'];
-        //console.log("position3=" + POSITION3);
+
     }
 
     if(urlParams['generic']){
@@ -1849,7 +1765,7 @@ function loadWeeksConfig(){
     $("#configStartWeek").html("");
     $("#configEndWeek").html("");
     for(var i=1;i<=maxWeek;i++){
-        //console.log("loadweeksconfig " + i);
+
         if(i<week){
             $("#configStartWeek").append(function(){
                 return ("<option value='"+i+"'>"+i+"</option>");
@@ -1857,7 +1773,7 @@ function loadWeeksConfig(){
         }
         // if(i!=1){
         if(i!=1){
-            //console.log(i);
+
             $("#configEndWeek").append(function(){
                 return ("<option value='"+i+"'>"+i+"</option>");
             });
@@ -1899,7 +1815,7 @@ function updateSelectStartWeek(){
 
 function updateSelectEndWeek(){
     var tempVal = $("#configEndWeek").val();
-    //console.log(tempVal+"");
+
     $("#configEndWeek").html("");
     for(var i=(parseInt($("#configStartWeek").val())+1);i<=maxWeek;i++){
         $("#configEndWeek").append(function(){
@@ -1920,17 +1836,13 @@ function loadWeekParameters(){
     //loadWeeksConfig();
     if(urlParams['startweek']){
         var tempStartWeek = parseInt(urlParams['startweek']);
-        //console.log('tempstartweek is ' + tempStartWeek);
-        // weeks = (week-tempStartWeek);
-        // console.log("tempstart week= " + tempStartWeek);
+
         $("#configStartWeek").val(parseInt(tempStartWeek));
         paramLoadWeeksConfig();
         // updateSelectStartWeek();
     }
 
     if(urlParams['endweek']){
-        //week = parseInt(urlParams['endweek']);
-        //console.log('week is ' + week);
         $("#configEndWeek").val(week)
         paramLoadWeeksConfig();
         // updateSelectEndWeek();
@@ -1946,7 +1858,6 @@ function updateConfig(){
         $("#configRB").attr('checked', true);
     }
     if(POSITION1=="WR" || POSITION2=="WR" || POSITION3=="WR"){
-        //console.log("WR IS SELECTED");
         $("#configWR").attr('checked', true);
     }
     if(POSITION1=="TE" || POSITION2=="TE" || POSITION3=="TE"){
@@ -1996,10 +1907,10 @@ function refineUrl()
     // var url = window.location.href;
     // //get url after/
     // var value = url.substring(url.lastIndexOf('/') + 1);
-    // console.log(value);
+
     // //get the part after before ?
     // value  = value.split("?")[0];
-    // console.log(value);
+
     // return value;
 }
 
@@ -2054,6 +1965,13 @@ $( document ).ready(function() {
             console.log("ERROR");
         }
         updateParameters();
+        $("#inactiveOverlay").addClass("hidden");
+        $("#inactiveOverlay").removeClass("visible");
+
+        $("#configPanel").addClass("configPanelClosed");
+        $("#configPanel").removeClass("configPanelOpen");
+
+        $("#configureIconImg").attr("src", "configure.png");
     })
 
     $("#weeks").on("click", function(){

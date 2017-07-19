@@ -1,4 +1,4 @@
-$phone-down = 'screen and (max-width: 768px)'
+$phone-down = 'screen and (max-width: 767px)'
 $tablet-up = 'screen and (min-width: 768px)'
 $desktop-up = 'screen and (min-width: 992px)'
 $desktop-large-up = 'screen and (min-width: 1200px)'
@@ -41,6 +41,7 @@ body
     //background-color #1e2428
     padding-left 8px
     padding-right 8px
+    margin 0
     @media $tablet-up
         padding-right 40px
         padding-left 40px
@@ -49,14 +50,58 @@ body
     font-family: 'Open Sans', sans-serif;
 
 #heroWrapper
+    @media $phone-down
+        width 100%
+        margin-left -40px
+        padding-left 50px
+        padding-top 6px
+        font-size 12px
+        background-color #434A55
+        height 40px
+        #filters
+            display block
+        #configureText
+            display none
+        #weeks
+            opacity .8
+        #weeks, #year
+            font-weight 700
+        #weeks, #filters, #year
+            display inline-block
+            margin-right 30px
+        #year
+            float left
+            margin-right 15px
+        #filters, #year
+            opacity .4
+        #year
+            font-weight 800
+        #filters
+            font-weight 400
+            display block
+        #configureIcon
+            position fixed
+            text-align center
+            right 0
+            top 0
+            width 40px
+            height 34px
+            padding 6px
+            background-color #434A55
+            opacity 1
+            cursor pointer
+            z-index 95
+            #configureIconImg
+                margin-top 2px
+                position relative
+                width 70%
     @media $tablet-up
         width calc(100% + 16px)
         margin-left -40px
         height 32px
         padding-left 64px
-        padding-top 8px
-        font-size 16px
-        //background-color #86003D
+        padding-top 10px
+        font-size 14px
         background-color #434A55
         #weeks
             opacity .8
@@ -95,6 +140,64 @@ body
             #configureIconImg
                 position relative
                 width 70%
+        // #configureIcon
+        //     position fixed
+        //     text-align center
+        //     right 0
+        //     top 0
+        //     width 40px
+        //     height 28px
+        //     padding 6px
+        //     background-color #434A55
+        //     opacity .6
+        //     cursor pointer
+        //     z-index 95
+        //     &:hover
+        //         opacity 1
+        //     #configureIconImg
+        //         position relative
+        //         width 70%
+        // background-color #434A55
+        // #weeks
+        //     opacity .8
+        // #weeks, #year
+        //     font-weight 700
+        // #weeks, #filters, #year
+        //     display inline-block
+        //     margin-right 30px
+        // #filters, #year
+        //     opacity .4
+        // #year
+        //     font-weight 800
+        // #filters
+        //     font-weight 400
+        // #configureText
+        //     float right
+        //     margin-right 60px
+        //     display inline block
+        //     opacity .6
+        //     position relative
+        //     z-index 95
+        // #configureIcon
+        //     position fixed
+        //     text-align center
+        //     right 0
+        //     top 0
+        //     width 40px
+        //     height 28px
+        //     padding 6px
+        //     background-color #434A55
+        //     opacity .6
+        //     cursor pointer
+        //     z-index 95
+        //     &:hover
+        //         opacity 1
+        //     #configureIconImg
+        //         position relative
+        //         width 70%
+    @media $desktop-up
+        padding-top 8px
+        font-size 16px
 
 #inactiveOverlay
     width 120%
@@ -120,6 +223,10 @@ body
     background-color rgba(67,74,85,.8)
     z-index 90
     transition right .3s ease-in-out
+    @media $phone-down
+        width 85%
+        background-color rgba(67,74,85,.9)
+
 
 #configWrapper
     padding-left 18px
@@ -130,6 +237,9 @@ body
     select, input
         background-color white
     .configName
+        margin-bottom 4px
+        font-size 18px
+        font-weight 700
         @media $tablet-up
             margin-bottom 4px
             font-size 14px
@@ -143,6 +253,7 @@ body
         display inline-block
         // background-color $textColor
     .configOptions
+        margin-bottom 32px
         @media $tablet-up
             margin-bottom 32px
     #configWeeksWrapper
@@ -168,6 +279,43 @@ body
         color white
         &:hover
             opacity .8
+    @media $phone-down
+        font-size 15px
+        color white
+        .configName
+            margin-bottom 12px
+        .checkboxWrapper
+            input
+                width 40px
+                height 40px
+                margin-right 8px
+            label
+                position relative
+                top -13px
+                margin-right 12px
+        select
+            font-size 16px
+            min-width 40px
+        input
+            font-size 16px
+        #updatePage
+            padding 12px 30px
+            font-size 15px
+            background-color $royalBlue
+            border none
+            border-radius 3px
+            font-weight 700
+            cursor pointer
+            display block
+            width auto
+            text-align center
+            width 60px
+            color white
+        // #configPosition
+        //     input
+        //         margin-right 4px
+        //     label
+        //         margin-right 6px
 
 
 
@@ -175,10 +323,14 @@ body
     right 0
 
 .configPanelClosed
+    @media $phone-down
+        right -86%
     right -181px
 
 
 #wrapper
+    @media $phone-down
+        padding-top 22px
     padding-top 60px
 
 .playerDiv
@@ -567,7 +719,7 @@ svg
 .weekGraphDivWrapper
     @media $phone-down
         float right
-        margin-right 2%
+        margin-right 5%
     display inline-block
     position relative
     width 20%
@@ -576,11 +728,27 @@ svg
     // padding-top 20px
     @media $tablet-up
         padding-left 3%
-        width 9%
+        width 12%
         margin-top 20px
     @media $desktop-up
-        padding-left 4%
-        width 10%
+        padding-left 3%
+        width 14%
+    &.smallWeekGraph
+        @media $tablet-up
+            padding-left 5%
+            width 7%
+            margin-top 20px
+        @media $desktop-up
+            padding-left 8%
+            width 5%
+    &.mediumWeekGraph
+        @media $tablet-up
+            padding-left 3%
+            width 9%
+            margin-top 20px
+        @media $desktop-up
+            padding-left 5%
+            width 10%
 
 .weekGraphDiv
     display block
@@ -594,27 +762,38 @@ svg
 .targetGraphDivWrapper
     @media $phone-down
         float right
-        margin-right 2%
+        margin-right 5%
         margin-top -8px
     display inline-block
     position relative
     width 20%
-    // background-color #444444
     vertical-align top
-    // padding-left 5%
-    // padding-top 40px
     @media $tablet-up
         display inline-block
-        padding-left 2.5%
+        padding-left 2%
         width 9%
         margin-top 32px
     @media $desktop-up
-        padding-left 4%
+        padding-left 2.1%
         width 10%
+    &.smallWeekGraph
+        @media $tablet-up
+            padding-left calc(3% + 1.1vw)
+            width 9%
+            margin-top 32px
+        @media $desktop-up
+            padding-left 4%
+            width 10%
+    &.mediumWeekGraph
+        @media $tablet-up
+            padding-left 3%
+            width 9%
+            margin-top 32px
+        @media $desktop-up
+            padding-left 4%
+            width 10%
 
-    // height 66px
-    //padding-top 10px
-    // padding-left 10px
+
 
 .targetGraphDiv
     display block
