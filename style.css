@@ -31,6 +31,7 @@ body {
   }
   #heroWrapper #filters {
     display: block;
+    font-size: 11px;
   }
   #heroWrapper #configureText {
     display: none;

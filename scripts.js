@@ -13,6 +13,7 @@ var maxWeek = 17;
 // var wantLabels = true;
 var wantLabels = 0;
 var floorCeiling = 1;
+var showAvgs = 0;
 
 var dbDone = 0;
 var tdbDone = 0;
@@ -520,7 +521,7 @@ var pageLoadNum = 0;
             if(currentWeek!=(tempWeek+"")){
                 //console.log("BYE WEEK " + tempWeek);
                 tempWeek++;
-                console.log(tempWeek);
+                // console.log(tempWeek);
                 tempWeek++;
             }else{
                 tempWeek++;
@@ -531,8 +532,8 @@ var pageLoadNum = 0;
 
     function createByeArr(inArr){
         var outArr;
-        console.log("create bye arr");
-        console.log(inArr);
+        // console.log("create bye arr");
+        // console.log(inArr);
 
     }
 
@@ -552,7 +553,7 @@ function renderPage(dataArr){
     //updateHeader();
 
     var testArray = d3.select(dataArr).sort(d3.ascending(function(d,i) {
-        console.log("sorting");
+        // console.log("sorting");
         return d[i].stats[0].values[5].val;
     }))
 
@@ -686,6 +687,7 @@ function renderPage(dataArr){
         .enter()
         .append("rect")
         .attr("width", function(values, i){
+            // console.log(tempValues);
             var maxVal = d.maxVal;
 
             var widthVal = "0%";
@@ -693,7 +695,7 @@ function renderPage(dataArr){
             if(tempValues[i+1]){
                 if(tempValues[i+1].vs=="BYE"){
                     if(tempValues[i+2]){
-                        //widthVal = ((((tempValues[i+2].val/maxVal) - (values.val/maxVal)) * 100) + "%");
+                        widthVal = ((((tempValues[i+2].val/maxVal) - (values.val/maxVal)) * 100) + "%");
                     }
                 }else{
                     widthVal = ((((tempValues[i+1].val/maxVal) - (values.val/maxVal)) * 100) + "%");
@@ -702,12 +704,14 @@ function renderPage(dataArr){
                     widthVal = "0%";
                 }
             }else{
-
                 this.remove();
             };
+            if(widthVal=="NaN%"){
+                widthVal = "0%";
+            }
 
             if(values.vs=="BYE"){
-                console.log("remove")
+                // console.log("remove")
                 this.remove();
             }
             return widthVal;
@@ -944,6 +948,13 @@ function renderPage(dataArr){
             .style("left", function(){
                 return ((avg/d.maxVal)*100)+"%";
             })
+            .style("display", function(){
+                if(showAvgs && avg>0){
+                    return "block";
+                }else{
+                    return;
+                }
+            })
             .append("div")
             .attr("class","avgPWrapper")
             .append("p")
@@ -984,12 +995,12 @@ function renderPage(dataArr){
     var weekGraphBar = weekGraphDiv.selectAll("div.weekGraphBar")
         .data(function(d){
             var valsByWeek = JSON.parse(JSON.stringify(d.stats[0].values));
-            console.log(valsByWeek);
-            console.log("between " + weeks);
+            // console.log(valsByWeek);
+            // console.log("between " + weeks);
             valsByWeek.sort(function(x, y){
                 return d3.ascending(parseInt(x.week), parseInt(y.week));
             });
-            console.log(valsByWeek);
+            // console.log(valsByWeek);
             return valsByWeek;
         })
         .enter()
@@ -999,9 +1010,9 @@ function renderPage(dataArr){
         })
         .style("left", function(d,i){
 
-            console.log(i);
+            // console.log(i);
             var tempLeftVal = ((Math.floor((1/(weeks + 1))*100))*i) + "%";
-            console.log(tempLeftVal);
+            // console.log(tempLeftVal);
             return tempLeftVal;
         })
         .style("opacity", function(d){
@@ -1011,7 +1022,6 @@ function renderPage(dataArr){
         .style("width", function(d){
             // return "8px";
             var tempWeekWidth = Math.floor((1/(weeks + 1))*100) + "%";
-            console.log(tempWeekWidth);
             return tempWeekWidth;
         })
         .style("height", function(d){
@@ -1458,34 +1468,34 @@ function renderPage(dataArr){
 
 
 
-    // d3.select("#wrapper").append("div")
-    //     .attr("class","gridlines");
-    //
-    // $(".gridlines").css("left", function(){
-    //     return ($(".singleStat").position().left + 40);
-    //     // return ($(".singleStat").position().left + 48);
-    // });
-    //
-    // $(".gridlines").css("width", function(){
-    //     return ($(".singleStat").width());
-    // });
-    //
-    // for(var k=0;k<11;k++){
-    //     d3.select(".gridlines").append("div")
-    //         .attr("class","gridline")
-    //         .attr("style",function(){
-    //             return "left:" + (k*10) + "%";
-    //         })
-    // }
-    //
-    // $(window).resize(function(){
-    //     $(".gridlines").css("left", function(){
-    //         return ($(".singleStat").position().left + 48);
-    //     });
-    //     $(".gridlines").css("width", function(){
-    //         return ($(".singleStat").width());
-    //     });
-    // })
+    d3.select("#wrapper").append("div")
+        .attr("class","gridlines");
+
+    $(".gridlines").css("left", function(){
+        return ($(".singleStat").position().left + 40);
+        // return ($(".singleStat").position().left + 48);
+    });
+
+    $(".gridlines").css("width", function(){
+        return ($(".singleStat").width());
+    });
+
+    for(var k=0;k<11;k++){
+        d3.select(".gridlines").append("div")
+            .attr("class","gridline")
+            .attr("style",function(){
+                return "left:" + (k*10) + "%";
+            })
+    }
+
+    $(window).resize(function(){
+        $(".gridlines").css("left", function(){
+            return ($(".singleStat").position().left + 40);
+        });
+        $(".gridlines").css("width", function(){
+            return ($(".singleStat").width());
+        });
+    })
 
 }
 
@@ -1616,11 +1626,18 @@ function pullConfig(){
     //NUMPLAYERS
     NUMPLAYERS = parseInt($("#configNumber").val());
 
-    //NUMPLAYERS
+    //GENERIC
     if($("#configColors").prop('checked')){
         generic = 0;
     }else{
         generic = 1;
+    }
+
+    //AVERAGES
+    if($("#configAverages").prop('checked')){
+        showAverages = 1;
+    }else{
+        showAverages = 0;
     }
 
 
@@ -1679,6 +1696,7 @@ function updateHeader(){
 function reloadPage(){
 
     dataArr = [];
+    var maxValArr = [];
 
     $("#wrapper").html("");
     setTimeout(loadPage, 250);
@@ -1737,6 +1755,10 @@ function loadParameters(){
 
     if(urlParams['generic']){
         generic = parseInt(urlParams['generic']);
+    }
+
+    if(urlParams['averages']){
+        showAvgs = parseInt(urlParams['averages']);
     }
 
     if(urlParams['endweek']){
@@ -1867,6 +1889,18 @@ function updateConfig(){
 
     $("#configNumber").val(NUMPLAYERS);
 
+    if(generic){
+        $("#configColors").attr('checked', false);
+    }else{
+        $("#configColors").attr('checked', true);
+    }
+
+    if(showAvgs){
+        $("#configAverages").attr('checked', true);
+    }else{
+        $("#configAverages").attr('checked', false);
+    }
+
 
     // loadWeeksConfig();
 
@@ -1894,12 +1928,12 @@ function updateParameters(){
 function refineUrl()
 {
 
-    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&scoring=" + SCORINGTYPE + "&generic=" + generic);
+    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
     if(POSITION2!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&scoring=" + SCORINGTYPE + "&generic=" + generic);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
     }
-    if(POSITION2!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&scoring=" + SCORINGTYPE + "&generic=" + generic);
+    if(POSITION3!=""){
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
     }
 
     return newUrl;
