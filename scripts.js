@@ -1468,7 +1468,39 @@ function renderPage(dataArr){
 
 
 
-    d3.select("#wrapper").append("div")
+    // d3.select("#wrapper").append("div")
+    //     .attr("class","gridlines");
+    //
+    // $(".gridlines").css("left", function(){
+    //     return ($(".singleStat").position().left + 40);
+    //     // return ($(".singleStat").position().left + 48);
+    // });
+    //
+    // $(".gridlines").css("width", function(){
+    //     return ($(".singleStat").width());
+    // });
+    //
+    // for(var k=0;k<11;k++){
+    //     d3.select(".gridlines").append("div")
+    //         .attr("class","gridline")
+    //         .attr("style",function(){
+    //             return "left:" + (k*10) + "%";
+    //         })
+    // }
+    //
+    // $(window).resize(function(){
+    //     $(".gridlines").css("left", function(){
+    //         return ($(".singleStat").position().left + 40);
+    //     });
+    //     $(".gridlines").css("width", function(){
+    //         return ($(".singleStat").width());
+    //     });
+    // })
+
+}
+
+function gridlines(){
+    d3.select("body").append("div")
         .attr("class","gridlines");
 
     $(".gridlines").css("left", function(){
@@ -1496,7 +1528,6 @@ function renderPage(dataArr){
             return ($(".singleStat").width());
         });
     })
-
 }
 
 
@@ -1572,6 +1603,7 @@ function dbDoneCheck(which){
         renderPage(dataArr);
         loadWeekParameters();
         updateHeader();
+        gridlines();
     }
 }
 
@@ -1635,9 +1667,9 @@ function pullConfig(){
 
     //AVERAGES
     if($("#configAverages").prop('checked')){
-        showAverages = 1;
+        showAvgs = 1;
     }else{
-        showAverages = 0;
+        showAvgs = 0;
     }
 
 
