@@ -29,7 +29,7 @@ var POSITION2 = "";
 var POSITION3 = "";
 var positionText = "RBs";
 var POSITIONNUM = 0;
-var WEEK = 1;
+var WEEK = 17;
 
 var maxValArr = [];
 
@@ -1395,7 +1395,7 @@ function dbDoneCheck(which){
         }
         pageLoadNum++;
         renderPage(dataArr);
-        loadWeekParameters();
+        updateConfig();
         updateHeader();
         gridlines();
     }
@@ -1479,9 +1479,15 @@ function pullConfig(){
 
     //WEEKS
     if($.isNumeric(parseInt($("#configEndWeek").val())) && $.isNumeric(parseInt($("#configStartWeek").val()))){
-        week = $("#configEndWeek").val();
-        var tempStartWeek = $("#configStartWeek").val();
-        weeks = (week-tempStartWeek);
+        if(parseInt($("#configEndWeek").val())>parseInt($("#configStartWeek").val())){
+            week = parseInt($("#configEndWeek").val())
+            var tempStartWeek = parseInt($("#configStartWeek").val())
+            weeks = (week-tempStartWeek);
+        }else{
+            var tempStartWeek = parseInt($("#configStartWeek").val());
+            week = maxWeek;
+            weeks = (week-tempStartWeek);
+        }
     }else{
         allowReload = 0;
     }
@@ -1605,22 +1611,39 @@ function loadParameters(){
         wantLabels = parseInt(urlParams['labels']);
     }
 
+    var tempStartWeek= -1;
+    var tempEndWeek= -1;
     if(urlParams['endweek']){
-        week = parseInt(urlParams['endweek']);
+        tempEndWeek = parseInt(urlParams['endweek']);
+        // week = parseInt(urlParams['endweek']);
     }
 
     if(urlParams['startweek']){
-        var tempStartWeek = parseInt(urlParams['startweek']);
-        weeks = (week-tempStartWeek);
+        tempStartWeek = parseInt(urlParams['startweek']);
+        // weeks = (week-tempStartWeek);
     }
-}
 
+    if(tempStartWeek>0 && tempStartWeek<maxWeek){
+        WEEK = tempStartWeek;
+    }else{
+        WEEK = 1;
+        tempStartWeek = 1;
+    }
+
+    if(tempEndWeek>WEEK && tempEndWeek<=maxWeek){
+        week=tempEndWeek;
+    }else{
+        week=maxWeek;
+    }
+    console.log("week is here " + week)
+    weeks = week-WEEK;
+}
 
 function loadWeeksConfig(){
     $("#configStartWeek").html("");
     $("#configEndWeek").html("");
     for(var i=1;i<=maxWeek;i++){
-        if(i<week){
+        if(i<maxWeek){
             $("#configStartWeek").append(function(){
                 return ("<option value='"+i+"'>"+i+"</option>");
             });
@@ -1631,66 +1654,6 @@ function loadWeeksConfig(){
             });
         }
     }
-}
-
-function paramLoadWeeksConfig(){
-    var tempStart = $("#configStartWeek").val();
-    var tempEnd = $("#configEndWeek").val();
-    $("#configStartWeek").html("");
-    $("#configEndWeek").html("");
-    for(var i=1;i<=maxWeek;i++){
-        if(i<week && i>=(week-weeks)){
-            $("#configStartWeek").append(function(){
-                return ("<option value='"+i+"'>"+i+"</option>");
-            });
-        }
-        if(i!=1 && i>=week){
-            $("#configEndWeek").append(function(){
-                return ("<option value='"+i+"'>"+i+"</option>");
-            });
-        }
-    }
-    $("#configStartWeek").val(tempStart);
-    $("#configEndWeek").val(tempEnd)
-}
-
-function updateSelectStartWeek(){
-    var tempVal = $("#configStartWeek").val();
-    $("#configStartWeek").html("");
-    for(var i=1;i<$("#configEndWeek").val();i++){
-        $("#configStartWeek").append(function(){
-            return ("<option value='"+i+"'>"+i+"</option>");
-        });
-    }
-    $("#configStartWeek").val(tempVal);
-}
-
-function updateSelectEndWeek(){
-    var tempVal = $("#configEndWeek").val();
-
-    $("#configEndWeek").html("");
-    for(var i=(parseInt($("#configStartWeek").val())+1);i<=maxWeek;i++){
-        $("#configEndWeek").append(function(){
-            return ("<option value='"+i+"'>"+i+"</option>");
-        });
-    }
-    $("#configEndWeek").val(tempVal);
-}
-
-function loadWeekParameters(){
-
-    if(urlParams['startweek']){
-        var tempStartWeek = parseInt(urlParams['startweek']);
-
-        $("#configStartWeek").val(parseInt(tempStartWeek));
-        paramLoadWeeksConfig();
-    }
-
-    if(urlParams['endweek']){
-        $("#configEndWeek").val(week)
-        paramLoadWeeksConfig();
-    }
-
 }
 
 function updateConfig(){
@@ -1728,6 +1691,10 @@ function updateConfig(){
     }else{
         $("#configLabels").attr('checked', false);
     }
+
+    console.log(week + " is week in updateconfig");
+    $("#configStartWeek").val(parseInt(week-weeks));
+    $("#configEndWeek").val(parseInt(week));
 }
 
 function updateParameters(){
