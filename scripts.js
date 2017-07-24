@@ -71,7 +71,13 @@ var pageLoadNum = 0;
         var touchdownsArr = [];
 
         for(var z=0;z<inArr.length;z++){
-            pointsArr.push(parseInt(inArr[z].standardPoints));
+            if(SCORINGTYPE = "halfPprPoints"){
+                pointsArr.push(parseInt(inArr[z].halfPprPoints));
+            }else if(SCORINGTYPE = "pprPoints"){
+                pointsArr.push(parseInt(inArr[z].pprPoints));
+            }else{
+                pointsArr.push(parseInt(inArr[z].standardPoints));
+            }
             targetsArr.push(parseInt(inArr[z].targets));
             recsArr.push(parseInt(inArr[z].receptions));
             recYardsArr.push(parseInt(inArr[z].receivingYards));
@@ -211,8 +217,13 @@ var pageLoadNum = 0;
                     currentTouchdowns.push(tempTouchdown);
                 }
 
-
-                var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
+                if(SCORINGTYPE = "halfPprPoints"){
+                    var tempPoint = {val: parseFloat(input[i].halfPprPoints), vs: currentOpponent, week: currentWeek};
+                }else if(SCORINGTYPE = "pprPoints"){
+                    var tempPoint = {val: parseInt(input[i].pprPoints), vs: currentOpponent, week: currentWeek};
+                }else{
+                    var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
+                }
                 currentPoints.push(tempPoint);
 
                 var tempTarget = {val: parseInt(input[i].targets), vs: currentOpponent, week: currentWeek};
@@ -466,8 +477,13 @@ var pageLoadNum = 0;
                 }
 
 
-
-                var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
+                if(SCORINGTYPE = "halfPprPoints"){
+                    var tempPoint = {val: parseFloat(input[i].halfPprPoints), vs: currentOpponent, week: currentWeek};
+                }else if(SCORINGTYPE = "pprPoints"){
+                    var tempPoint = {val: parseInt(input[i].pprPoints), vs: currentOpponent, week: currentWeek};
+                }else{
+                    var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
+                }
                 currentPoints.push(tempPoint);
 
                 var tempTarget = {val: parseInt(input[i].targets), vs: currentOpponent, week: currentWeek};
@@ -1654,6 +1670,14 @@ function pullConfig(){
         //POSITION="RB' OR position='TE' OR position='WR"
     }
 
+    //SCORING
+    if($("#configScoring").val()=="halfPprPoints"){
+        SCORINGTYPE = "halfPprPoints";
+    }else if($("#configScoring").val()=="pprPoints"){
+        SCORINGTYPE = "pprPoints";
+    }else{
+        SCORINGTYPE = "standardPoints";
+    }
 
     //NUMPLAYERS
     NUMPLAYERS = parseInt($("#configNumber").val());
@@ -1719,7 +1743,13 @@ function updateHeader(){
                 filterString += ", AND "+POSITION3+"s";
             }
         }
-        filterString += " BY AVERAGE STANDARD POINTS";
+        if(SCORINGTYPE = "halfPprPoints"){
+            filterString += " BY AVERAGE .5 PPR POINTS";
+        }else if(SCORINGTYPE = "pprPoints"){
+            filterString += " BY AVERAGE PPR POINTS";
+        }else{
+            filterString += " BY AVERAGE STANDARD POINTS";
+        }
         return filterString;
     })
 
@@ -1782,7 +1812,11 @@ function loadParameters(){
     }
     if(urlParams['position3']){
         POSITION3 = urlParams['position3'];
+    }
 
+    if(urlParams['scoring']){
+        SCORINGTYPE = urlParams['scoring'];
+        $("#configScoring").val(SCORINGTYPE);
     }
 
     if(urlParams['generic']){
@@ -1921,6 +1955,8 @@ function updateConfig(){
 
     $("#configNumber").val(NUMPLAYERS);
 
+    $("#configScoring").val(SCORINGTYPE);
+
     if(generic){
         $("#configColors").attr('checked', false);
     }else{
@@ -1960,12 +1996,12 @@ function updateParameters(){
 function refineUrl()
 {
 
-    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
+    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs);
     if(POSITION2!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&generic=" + generic + "&averages=" + showAvgs);
     }
     if(POSITION3!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&scoring=" + SCORINGTYPE + "&generic=" + generic + "&averages=" + showAvgs);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&generic=" + generic + "&averages=" + showAvgs);
     }
 
     return newUrl;
