@@ -141,61 +141,6 @@ body
             #configureIconImg
                 position relative
                 width 70%
-        // #configureIcon
-        //     position fixed
-        //     text-align center
-        //     right 0
-        //     top 0
-        //     width 40px
-        //     height 28px
-        //     padding 6px
-        //     background-color #434A55
-        //     opacity .6
-        //     cursor pointer
-        //     z-index 95
-        //     &:hover
-        //         opacity 1
-        //     #configureIconImg
-        //         position relative
-        //         width 70%
-        // background-color #434A55
-        // #weeks
-        //     opacity .8
-        // #weeks, #year
-        //     font-weight 700
-        // #weeks, #filters, #year
-        //     display inline-block
-        //     margin-right 30px
-        // #filters, #year
-        //     opacity .4
-        // #year
-        //     font-weight 800
-        // #filters
-        //     font-weight 400
-        // #configureText
-        //     float right
-        //     margin-right 60px
-        //     display inline block
-        //     opacity .6
-        //     position relative
-        //     z-index 95
-        // #configureIcon
-        //     position fixed
-        //     text-align center
-        //     right 0
-        //     top 0
-        //     width 40px
-        //     height 28px
-        //     padding 6px
-        //     background-color #434A55
-        //     opacity .6
-        //     cursor pointer
-        //     z-index 95
-        //     &:hover
-        //         opacity 1
-        //     #configureIconImg
-        //         position relative
-        //         width 70%
     @media $desktop-up
         padding-top 8px
         font-size 16px
@@ -254,7 +199,7 @@ body
         display inline-block
         // background-color $textColor
     .configOptions
-        margin-bottom 32px
+        margin-bottom 15px
         @media $tablet-up
             margin-bottom 32px
     #configWeeksWrapper
@@ -312,16 +257,10 @@ body
             text-align center
             width 60px
             color white
-        // #configPosition
-        //     input
-        //         margin-right 4px
-        //     label
-        //         margin-right 6px
-
-
 
 .configPanelOpen
     right 0
+    overflow scroll
 
 .configPanelClosed
     @media $phone-down
@@ -343,10 +282,6 @@ body
     @media $tablet-up
         height 136px
         margin-bottom 21px
-
-    // padding-top 20px
-    // padding-bottom 20px
-    //padding-left 5%
 
 .playerDivBG
     position absolute
@@ -384,24 +319,18 @@ body
         width 20%
         margin-left 3%
         margin-top 8px
-    //height 100%
-
-
     margin-right 2%
     display inline-block
     vertical-align top
-    // margin-bottom 30px
 
 .playerInitialsWrapper
     position absolute
     width 100%
-    //height 100%
     z-index -1
     margin-top 14px
     display none
     @media $desktop-up
         display block
-
 
 .playerInitials
     font-size 98px
@@ -439,8 +368,6 @@ body
         line-height 20px
         letter-spacing 3px
     font-weight 500
-
-    //letter-spacing 3px
     text-transform uppercase
 
 .playerFirstName
@@ -500,12 +427,8 @@ body
     @media $tablet-up
         width 33%
         padding-top 16px
-    //height 100%
-    //background-color white
-    // opacity .1
     vertical-align top
     display inline-block
-    // padding-top 16px;
 
 
 .singleStatDivWrapper
@@ -525,13 +448,11 @@ body
     width 100%
     height 6px
     background-color rgba(10,15,20,.8)
-    //margin-bottom 13px
     position relative
     cursor pointer
     transition margin-bottom .4s linear
     .valNum
         display none
-        // letter-spacing -3px
     .valNumTight
         color #444444
         &:hover
@@ -540,12 +461,7 @@ body
     .opaque
         opacity 0
         display block
-        // margin-bottom 24px
         transition opacity .8s linear
-    // &:hover
-    //     div
-    //         display block
-
 svg
     float left
 
@@ -553,7 +469,6 @@ svg
 .statHover
     position absolute
     height 16px
-    //padding 0px 6px
     background-color #32363b
     top -33px
     text-align center
@@ -580,15 +495,11 @@ svg
 .valNum
     position absolute
     height 16px
-    // display none
-    //padding 0px 6px
-    // background-color #32363b
     top 10px
     text-align center
     width 26px
     transform translateX(-13px)
     opacity .5
-    //transition opacity .8s linear
     p
         line-height 10px
         margin 0
@@ -603,11 +514,6 @@ svg
     .statHover
         p
             line-height 16px
-        // opacity .4
-        // transition 6s linear
-
-// .valNumTight
-//     color green
 
 .labelNumDiv
   position absolute
@@ -654,7 +560,6 @@ svg
         display none
         position absolute
         height 16px
-        //padding 0px 6px
         background-color #32363b
         top -20px
         text-align center
@@ -679,10 +584,6 @@ svg
   width 100%
   height 13px
   background-color #449944
-
-
-
-
 
 //Week Graph
 
@@ -725,8 +626,6 @@ svg
     position relative
     width 20%
     vertical-align top
-    // padding-left 5%
-    // padding-top 20px
     @media $tablet-up
         padding-left 3%
         width 12%
@@ -800,12 +699,10 @@ svg
     display block
     position relative
     vertical-align top
-    //margin-left 4%
     margin-top 8px
     height 25px
     @media $tablet-up
         height 46px
-    // color: rgb(151, 176, 201)
     color white
     .targetGraph
         font-weight 700
@@ -898,22 +795,6 @@ svg
     margin-left 20px
     line-height 4px
 
-//
-// html{
-//     height: 100%;
-//     margin: 0;
-//     padding: 0;
-// }
-//
-// body{
-//     height: 100%;
-//     margin: 0;
-//     padding: 0;
-// }
-//
-// #wrapper
-//     height 100%
-
 .gridlines
     @media $phone-down
         display none
@@ -923,7 +804,6 @@ svg
     min-height 100%
     width 200px
     display block
-    // background-color #33333a
 
 .gridline
     display inline-block
@@ -936,7 +816,6 @@ svg
     background-color #24282D
     top 0
     opacity .5
-
 
 
 
@@ -1467,11 +1346,6 @@ svg
         .targetGraphDiv
             .targetGraph
                 color $generic2
-
-
-
-
-
 
 
 
