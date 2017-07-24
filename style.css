@@ -557,8 +557,8 @@ svg {
   background-color: #32363b;
   top: -33px;
   text-align: center;
-  width: 90px;
   transform: translateX(-32px);
+  width: auto;
 }
 .statHover p {
   line-height: 16px;
@@ -566,6 +566,7 @@ svg {
   font-size: 11px;
   letter-spacing: 0.5px;
   font-weight: 300;
+  min-width: 90px;
 }
 .downCaret {
   position: absolute;

@@ -815,8 +815,65 @@ function renderPage(dataArr){
         .attr("position","absolute")
         .attr("class","statHover")
         .append("p")
-        .text(function(values,i){
+        .style("width", function(values, i){
+            var numNums=1;
+            var q = 1;
+            var byeFlag = 0;
+            while(q>0){
+                if(d.values[i-q]){
+                    if(d.values[i-q].val==values.val){
+                        if(d.values[i-q].vs == "BYE"){
+                            byeFlag = 1;
+                        }
+                        q++;
+                    }else{
+                        numNums = q;
+                        q=-1;
+                    }
+                }else{
+                    numNums = q;
+                    q=-1;
+                }
+            }
+            numNums = (numNums-byeFlag);
 
+            if(numNums>1){
+                var tempWidth = (numNums*80) + "px";
+                byeFlag = 0;
+                numNums = 1;
+                return tempWidth;
+            }
+            byeFlag = 0;
+            numNums = 1;
+            return "auto";
+        })
+        .text(function(values,i){
+            var numNums=1;
+            var q = 1;
+            while(q>0){
+                if(d.values[i-q]){
+                    if(d.values[i-q].val==values.val){
+                        q++;
+                    }else{
+                        numNums = q;
+                        q=-1;
+                    }
+                }else{
+                    numNums = q;
+                    q=-1;
+                }
+            }
+            if(numNums>1){
+                var tempNumText = "WK " + values.week + " vs. " + values.vs.toUpperCase();
+                for(var p=2;p<=numNums;p++){
+                    if(d.values[i-(p-1)].vs != "BYE"){
+                        tempNumText += " &  WK " + d.values[i-(p-1)].week + " vs. " + d.values[i-(p-1)].vs.toUpperCase();
+                    }
+                }
+                numNums = 1;
+                return tempNumText;
+            }
+            numNums = 1;
             return ("WK " + values.week + " | " + values.vs.toUpperCase());
         });
 
