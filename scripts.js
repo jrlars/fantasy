@@ -63,9 +63,9 @@ function castResults(inArr){
     var touchdownsArr = [];
 
     for(var z=0;z<inArr.length;z++){
-        if(SCORINGTYPE = "halfPprPoints"){
+        if(SCORINGTYPE == "halfPprPoints"){
             pointsArr.push(parseInt(inArr[z].halfPprPoints));
-        }else if(SCORINGTYPE = "pprPoints"){
+        }else if(SCORINGTYPE == "pprPoints"){
             pointsArr.push(parseInt(inArr[z].pprPoints));
         }else{
             pointsArr.push(parseInt(inArr[z].standardPoints));
@@ -209,9 +209,9 @@ function createArray(input){
                 currentTouchdowns.push(tempTouchdown);
             }
 
-            if(SCORINGTYPE = "halfPprPoints"){
+            if(SCORINGTYPE == "halfPprPoints"){
                 var tempPoint = {val: parseFloat(input[i].halfPprPoints), vs: currentOpponent, week: currentWeek};
-            }else if(SCORINGTYPE = "pprPoints"){
+            }else if(SCORINGTYPE == "pprPoints"){
                 var tempPoint = {val: parseInt(input[i].pprPoints), vs: currentOpponent, week: currentWeek};
             }else{
                 var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
@@ -469,9 +469,9 @@ function createArray(input){
             }
 
 
-            if(SCORINGTYPE = "halfPprPoints"){
+            if(SCORINGTYPE == "halfPprPoints"){
                 var tempPoint = {val: parseFloat(input[i].halfPprPoints), vs: currentOpponent, week: currentWeek};
-            }else if(SCORINGTYPE = "pprPoints"){
+            }else if(SCORINGTYPE == "pprPoints"){
                 var tempPoint = {val: parseInt(input[i].pprPoints), vs: currentOpponent, week: currentWeek};
             }else{
                 var tempPoint = {val: parseInt(input[i].standardPoints), vs: currentOpponent, week: currentWeek};
@@ -1521,9 +1521,9 @@ function updateHeader(){
                 filterString += ", AND "+POSITION3+"s";
             }
         }
-        if(SCORINGTYPE = "halfPprPoints"){
+        if(SCORINGTYPE == "halfPprPoints"){
             filterString += " BY AVERAGE .5 PPR POINTS";
-        }else if(SCORINGTYPE = "pprPoints"){
+        }else if(SCORINGTYPE == "pprPoints"){
             filterString += " BY AVERAGE PPR POINTS";
         }else{
             filterString += " BY AVERAGE STANDARD POINTS";
