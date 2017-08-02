@@ -30,6 +30,7 @@ var POSITION3 = "";
 var positionText = "RBs";
 var POSITIONNUM = 0;
 var WEEK = 17;
+var SORTBY = "points";
 
 var maxValArr = [];
 
@@ -37,6 +38,15 @@ var pageLoadNum = 0;
 
 
 var dataPull;
+
+function checkMobile(){
+    var width = $(window).width();
+    if(width>768){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 function castTargets(inArr){
     var tempObj = {};
@@ -1373,11 +1383,12 @@ function renderPage(dataArr){
 }
 
 function gridlines(){
+    $(".gridlines").remove();
     d3.select("body").append("div")
         .attr("class","gridlines");
 
     $(".gridlines").css("left", function(){
-        return ($(".singleStat").position().left + 40);
+        return ($(".singleStat").position().left + 60);
         // return ($(".singleStat").position().left + 48);
     });
 
@@ -1395,7 +1406,7 @@ function gridlines(){
 
     $(window).resize(function(){
         $(".gridlines").css("left", function(){
-            return ($(".singleStat").position().left + 40);
+            return ($(".singleStat").position().left + 60);
         });
         $(".gridlines").css("width", function(){
             return ($(".singleStat").width());
@@ -1408,7 +1419,7 @@ function queryDB(){
     $.ajax({
         type: "GET",
         url: "server.php",
-        data: { "purpose" : "queryDB", "startWeek": (week-weeks), "endWeek": week, "numPlayers": NUMPLAYERS, "position1": POSITION1, "position2": POSITION2, "position3": POSITION3, "scoringType":SCORINGTYPE},
+        data: { "purpose" : "queryDB", "startWeek": (week-weeks), "endWeek": week, "numPlayers": NUMPLAYERS, "position1": POSITION1, "position2": POSITION2, "position3": POSITION3, "scoringType":SCORINGTYPE, "sort": SORTBY},
         success: function (response) {
         }
     })
@@ -1509,6 +1520,12 @@ function pullConfig(){
         SCORINGTYPE = "standardPoints";
     }
 
+    //SORT
+    SORTBY = $("#configSort").val();
+    // if($("#configSort").val()=="points"){
+    //     SORTBY = SCORINGTYPE;
+    // }
+
     //NUMPLAYERS
     NUMPLAYERS = parseInt($("#configNumber").val());
 
@@ -1584,13 +1601,31 @@ function updateHeader(){
                 filterString += ", AND "+POSITION3+"s";
             }
         }
-        if(SCORINGTYPE == "halfPprPoints"){
-            filterString += " BY AVERAGE .5 PPR POINTS";
-        }else if(SCORINGTYPE == "pprPoints"){
-            filterString += " BY AVERAGE PPR POINTS";
+        if(SORTBY == "points"){
+            console.log("is points");
+            if(SCORINGTYPE == "halfPprPoints"){
+                filterString += " BY AVG .5 PPR POINTS";
+            }else if(SCORINGTYPE == "pprPoints"){
+                filterString += " BY AVG PPR POINTS";
+            }else{
+                filterString += " BY AVG STANDARD POINTS";
+            }
         }else{
-            filterString += " BY AVERAGE STANDARD POINTS";
+            if(SORTBY == "targets"){
+                filterString += " BY AVG TARGETS";
+            }else if(SORTBY == "receptions"){
+                filterString += " BY AVG RECEPTIONS";
+            }else if(SORTBY == "receivingYards"){
+                filterString += " BY AVG REC YDS";
+            }else if(SORTBY == "rushes"){
+                filterString += " BY AVG RUSHES";
+            }else if(SORTBY == "rushingYards"){
+                filterString += " BY AVG RUSH YDS";
+            }else if(SORTBY == "touchdowns"){
+                filterString += " BY AVG TDS";
+            }
         }
+
         return filterString;
     })
 
@@ -1653,7 +1688,14 @@ function loadParameters(){
 
     if(urlParams['scoring']){
         SCORINGTYPE = urlParams['scoring'];
+        console.log(SCORINGTYPE);
+        console.log($("#configScoring"));
         $("#configScoring").val(SCORINGTYPE);
+    }
+
+    if(urlParams['sort']){
+        SORTBY = urlParams['sort'];
+        $("#configSort").val(SORTBY);
     }
 
     if(urlParams['generic']){
@@ -1731,6 +1773,8 @@ function updateConfig(){
 
     $("#configScoring").val(SCORINGTYPE);
 
+    $("#configSort").val(SORTBY);
+
     if(generic){
         $("#configColors").attr('checked', false);
     }else{
@@ -1772,12 +1816,12 @@ function updateParameters(){
 
 function refineUrl(){
 
-    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels);
+    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY);
     if(POSITION2!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels  + "&sort=" + SORTBY);
     }
     if(POSITION3!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY);
     }
 
     return newUrl;
@@ -1791,9 +1835,94 @@ $( document ).ready(function() {
     updateConfig();
     pageListeners();
 
+
+    // init controller
+    var controller = new ScrollMagic.Controller();
+
+
+    var scene = new ScrollMagic.Scene({
+									triggerElement: "#hero",
+                                    duration: 100
+								})
+                                .setTween("#pageTitle", {opacity:.4, marginTop: "20px", scale: 0.85}) // the tween durtion can be omitted and defaults to 1
+								// .addIndicators({name: "1 (duration: 0)"}) // add indicators (requires plugin)
+								.addTo(controller);
+
+    scene.triggerHook("0");
+    scene.offset(-93);
+
+    var scene2
+    if(checkMobile()){
+        scene2 = new ScrollMagic.Scene({
+    									triggerElement: "body",
+                                        duration: 10
+    								})
+                                    .setTween("#logo", {color: "white", opacity: 1, marginTop: 2}) // the tween durtion can be omitted and defaults to 1
+    								// .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+    								.addTo(controller);
+
+        scene2.offset(10);
+        scene2.triggerHook("0");
+    }else{
+        scene2 = new ScrollMagic.Scene({
+    									triggerElement: "body",
+                                        duration: 15
+    								})
+                                    .setTween("#logo", {color: "white", opacity: 1}) // the tween durtion can be omitted and defaults to 1
+    								// .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+    								.addTo(controller);
+
+        scene2.offset(45);
+        scene2.triggerHook("0");
+    }
+
+
+    var scene3 = new ScrollMagic.Scene({
+									triggerElement: "#heroWrapper"
+								})
+                                .setPin("#heroWrapper")
+								// .addIndicators({name: "4 (duration: 0)"}) // add indicators (requires plugin)
+								.addTo(controller);
+
+    scene3.triggerHook("0");
+
+
+
+
+
+    var $logo = $('#logo');
+    var logoChange = new TimelineMax()
+    		.to(".year-loader", 1, {rotation:'0',
+        			onStart: function () {$logo.html("tfyi");},
+                    onReverseComplete: function () {$logo.html("tidbits.fyi");}
+        		}
+        	)
+
+    	var yearCount = new ScrollMagic.Scene({
+    		triggerElement:'body',
+    		triggerHook:0,
+            offset:60,
+    		duration:'100px'
+    	})
+    	.setTween(logoChange)
+    	.addTo(controller);
+
+
+
+
+
+
+
+
+
     $("#configureIcon").on("click", function(){
 
         if($("#configPanel").hasClass("configPanelClosed")){
+
+            if($("body").scrollTop()<93){
+                window.scrollTo(0, 93);
+            }
+
             $("#inactiveOverlay").removeClass("hidden");
             $("#inactiveOverlay").addClass("visible");
 
