@@ -1805,7 +1805,9 @@ function updateParameters(){
     var newUrl = refineUrl();//fetch new url
 
     //here you pass whatever you want to appear in the url after the domain /
-    window.history.pushState("object or string", "Title", "/"+newUrl );
+    // window.history.pushState("object or string", "Title", "/"+newUrl );
+    console.log(newUrl);
+    window.history.replaceState(null, null, window.location.pathname+newUrl);
 
 
     /*Helper function to extract the URL between the last / and before ?
@@ -1815,6 +1817,22 @@ function updateParameters(){
 }
 
 function refineUrl(){
+
+    // //get full URI
+    // var currURI= window.location.href; //get current address
+    // // ****** get the URI between what's after '/' and befor '?'
+    // //1- get URI after'/'
+    // if(currURI.indexOf(".fyi")!=-1){
+    //     var afterDomain= currURI.substring(currURI.lastIndexOf('.fyi/') + 4);
+    // }else{
+    //     var afterDomain= currURI.substring(currURI.lastIndexOf('/') + 1);
+    // }
+    // // var afterDomain= currURI.substring(currURI.lastIndexOf('/') + 1);
+    // //2- get the part before '?'
+    // var beforeQueryString= afterDomain.split("?")[0];
+    // console.log(beforeQueryString);
+
+
 
     var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY);
     if(POSITION2!=""){
