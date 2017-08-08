@@ -1,3 +1,11 @@
+.visible-xs {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .visible-xs {
+    display: initial;
+  }
+}
 .theDiv {
   display: inline-block;
 }

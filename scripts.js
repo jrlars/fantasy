@@ -129,6 +129,7 @@ function castPlayerInfo(inArr){
 
 function createArray(input){
     var output = [];
+    maxValArr = [];
 
     var currentPlayer = "";
     var currentObject = {};
