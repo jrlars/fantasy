@@ -1419,7 +1419,7 @@ function gridlines(){
 function queryDB(){
     $.ajax({
         type: "GET",
-        url: "server.php",
+        url: "leaders/server.php",
         data: { "purpose" : "queryDB", "startWeek": (week-weeks), "endWeek": week, "numPlayers": NUMPLAYERS, "position1": POSITION1, "position2": POSITION2, "position3": POSITION3, "scoringType":SCORINGTYPE, "sort": SORTBY},
         success: function (response) {
         }
@@ -1438,7 +1438,7 @@ function queryDB(){
 function queryTargets(){
     $.ajax({
         type: "GET",
-        url: "server.php",
+        url: "leaders/server.php",
         data: { "purpose" : "queryTargets", "startWeek": (week-weeks), "endWeek": week},
         success: function (response) {
             //alert ("successfully loaded");
@@ -1948,7 +1948,7 @@ $( document ).ready(function() {
             $("#configPanel").removeClass("configPanelClosed");
             $("#configPanel").addClass("configPanelOpen");
 
-            $("#configureIconImg").attr("src", "configure_exit.png");
+            $("#configureIconImg").attr("src", "leaders/configure_exit.png");
         }else{
             $("#inactiveOverlay").addClass("hidden");
             $("#inactiveOverlay").removeClass("visible");
@@ -1956,7 +1956,7 @@ $( document ).ready(function() {
             $("#configPanel").addClass("configPanelClosed");
             $("#configPanel").removeClass("configPanelOpen");
 
-            $("#configureIconImg").attr("src", "configure.png");
+            $("#configureIconImg").attr("src", "leaders/configure.png");
         }
 
     })
@@ -1975,7 +1975,7 @@ $( document ).ready(function() {
         $("#configPanel").addClass("configPanelClosed");
         $("#configPanel").removeClass("configPanelOpen");
 
-        $("#configureIconImg").attr("src", "configure.png");
+        $("#configureIconImg").attr("src", "leaders/configure.png");
     })
 
     $("#weeks").on("click", function(){
