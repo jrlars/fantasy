@@ -271,11 +271,11 @@ body {
   display: inline-block;
 }
 #configWrapper .configOptions {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 @media screen and (min-width: 768px) {
   #configWrapper .configOptions {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 }
 #configWrapper #configWeeksWrapper p {
@@ -354,6 +354,11 @@ body {
     text-align: center;
     width: 60px;
     color: #fff;
+  }
+}
+@media screen and (max-width: 767px) and (max-width: 767px) {
+  #configWrapper #updatePage {
+    margin-bottom: 30px;
   }
 }
 .configPanelOpen {
@@ -1392,6 +1397,18 @@ svg {
   background-color: #e3c48f;
 }
 .LA .targetGraphDivWrapper .targetGraphDiv .targetGraph {
+  color: #e3c48f;
+}
+.LAC .playerNameWrapperDiv .playerInfo {
+  color: #e3c48f;
+}
+.LAC svg rect {
+  fill: #e3c48f;
+}
+.LAC .weekGraphDiv .weekGraphBar {
+  background-color: #e3c48f;
+}
+.LAC .targetGraphDivWrapper .targetGraphDiv .targetGraph {
   color: #e3c48f;
 }
 .TB .playerNameWrapperDiv .playerInfo {

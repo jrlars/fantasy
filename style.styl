@@ -257,9 +257,9 @@ body
         display inline-block
         // background-color $textColor
     .configOptions
-        margin-bottom 18px
+        margin-bottom 14px
         @media $tablet-up
-            margin-bottom 32px
+            margin-bottom 20px
     #configWeeksWrapper
         p
             margin 0
@@ -311,6 +311,8 @@ body
             display inline-block
             font-size 12px
         #updatePage
+            @media $phone-down
+                margin-bottom 30px
             padding 12px 30px
             font-size 15px
             background-color $royalBlue
@@ -1331,6 +1333,21 @@ svg
                 color $gold
 
 .LA
+    .playerNameWrapperDiv
+        .playerInfo
+            color $gold
+    svg
+        rect
+            fill $gold
+    .weekGraphDiv
+        .weekGraphBar
+            background-color $gold
+    .targetGraphDivWrapper
+        .targetGraphDiv
+            .targetGraph
+                color $gold
+
+.LAC
     .playerNameWrapperDiv
         .playerInfo
             color $gold

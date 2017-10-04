@@ -1,10 +1,27 @@
-var year = 2016;
+var YEAR = 2016;
 
 //you're stupid and this is actually weeks-1, or what's the difference between from and to in your query
 var weeks = 16;
 //week is the LAST WEEK YOU HAVE SCORES FOR
 var week = 17;
 var maxWeek = 17;
+
+function checkWeeks(){
+    maxWeek = 17;
+    if(YEAR==2017){
+        maxWeek = 3;
+    }
+    if(week>maxWeek){
+        week = maxWeek;
+    }
+    if(weeks>week-1){
+        weeks = week-1;
+    }
+    // if($("#configStartWeek").val()>=(week)){
+    //     $("#configStartWeek").val(1);
+    //     weeks = week-1;
+    // }
+}
 
 var wantLabels = 0;
 var floorCeiling = 1;
@@ -29,7 +46,7 @@ var POSITION2 = "";
 var POSITION3 = "";
 var positionText = "RBs";
 var POSITIONNUM = 0;
-var WEEK = 17;
+//var WEEK = 17;
 var SORTBY = "points";
 
 var maxValArr = [];
@@ -144,11 +161,15 @@ function createArray(input){
     var currentRushYards = [];
     var currentTouchdowns = [];
 
+    // console.log("createarray week:");
+    // console.log(week)
+    // console.log("createarray weeks:");
+    // console.log(weeks);
     var startWeek = (week-weeks);
     var endWeek = week;
     var tempWeek = startWeek;
-    console.log(startWeek + " startweek");
-    console.log(endWeek + " endweek");
+    // console.log(startWeek + " startweek");
+    // console.log(endWeek + " endweek");
     //var tempPlayer = input[0].playerName;
     var tempPlayer = "";
     var byeFlag = 0;
@@ -1420,7 +1441,7 @@ function queryDB(){
     $.ajax({
         type: "GET",
         url: "leaders/server.php",
-        data: { "purpose" : "queryDB", "startWeek": (week-weeks), "endWeek": week, "numPlayers": NUMPLAYERS, "position1": POSITION1, "position2": POSITION2, "position3": POSITION3, "scoringType":SCORINGTYPE, "sort": SORTBY},
+        data: { "purpose" : "queryDB", "startWeek": (week-weeks), "endWeek": week, "numPlayers": NUMPLAYERS, "position1": POSITION1, "position2": POSITION2, "position3": POSITION3, "scoringType":SCORINGTYPE, "sort": SORTBY, "year": YEAR},
         success: function (response) {
         }
     })
@@ -1439,7 +1460,7 @@ function queryTargets(){
     $.ajax({
         type: "GET",
         url: "leaders/server.php",
-        data: { "purpose" : "queryTargets", "startWeek": (week-weeks), "endWeek": week},
+        data: { "purpose" : "queryTargets", "startWeek": (week-weeks), "endWeek": week, 'year': YEAR},
         success: function (response) {
             //alert ("successfully loaded");
         }
@@ -1471,6 +1492,8 @@ function dbDoneCheck(which){
 }
 
 function loadPage(){
+    //console.log("IN LOAD PAGE");
+
     queryDB();
     queryTargets();
 }
@@ -1551,6 +1574,22 @@ function pullConfig(){
         wantLabels = 0;
     }
 
+    //YEAR
+    if($("#configYear").val()=="2016"){
+        YEAR = 2016;
+    }else if($("#configYear").val()=="2017"){
+        YEAR = 2017;
+    }else{
+        YEAR = 2016;
+    }
+
+    //FLOOR/CEILING
+    if($("#configFloorCeiling").val()=="0"){
+        floorCeiling = 0;
+    }else{
+        floorCeiling = 1;
+    }
+
 
     //WEEKS
     if($.isNumeric(parseInt($("#configEndWeek").val())) && $.isNumeric(parseInt($("#configStartWeek").val()))){
@@ -1575,7 +1614,7 @@ function updateHeader(){
     })
 
     $("#year").html(function(){
-        return year;
+        return YEAR;
     })
 
     $("#filters").html(function(){
@@ -1603,7 +1642,6 @@ function updateHeader(){
             }
         }
         if(SORTBY == "points"){
-            console.log("is points");
             if(SCORINGTYPE == "halfPprPoints"){
                 filterString += " BY AVG .5 PPR POINTS";
             }else if(SCORINGTYPE == "pprPoints"){
@@ -1638,15 +1676,21 @@ function reloadPage(){
 
     $("#wrapper").html("");
     setTimeout(loadPage, 250);
+    setTimeout(function(){
+        if($("#wrapper").html()==""){
+            //console.log("HAPPENED");
+            loadPage();
+        }
+    }, 1000);
 }
 
 function pageListeners(){
-    $("#configEndWeek").on("change",function(){
-        updateSelectStartWeek();
-    });
-    $("#configStartWeek").on("change",function(){
-        updateSelectEndWeek();
-    });
+    // $("#configEndWeek").on("change",function(){
+    //     updateSelectStartWeek();
+    // });
+    // $("#configStartWeek").on("change",function(){
+    //     updateSelectEndWeek();
+    // });
 
     $(".configConfig").on("change", function(){
         allowReload= 1;
@@ -1669,19 +1713,21 @@ function loadParameters(){
     })();
 
     if(urlParams['year']){
-        year = parseInt(urlParams['year']);
+        YEAR = parseInt(urlParams['year']);
+        checkWeeks();
+        //loadWeeksConfig();
     }
+    //checkWeeks();
+    //loadWeeksConfig();
     if(urlParams['numplayers']){
         NUMPLAYERS = parseInt(urlParams['numplayers']);
         $("#configNumber").val(NUMPLAYERS);
     }
     if(urlParams['position1']){
         POSITION1 = urlParams['position1'];
-
     }
     if(urlParams['position2']){
         POSITION2 = urlParams['position2'];
-
     }
     if(urlParams['position3']){
         POSITION3 = urlParams['position3'];
@@ -1689,14 +1735,16 @@ function loadParameters(){
 
     if(urlParams['scoring']){
         SCORINGTYPE = urlParams['scoring'];
-        console.log(SCORINGTYPE);
-        console.log($("#configScoring"));
         $("#configScoring").val(SCORINGTYPE);
     }
 
     if(urlParams['sort']){
         SORTBY = urlParams['sort'];
         $("#configSort").val(SORTBY);
+    }
+
+    if(urlParams['floorceiling']){
+        floorCeiling = parseInt(urlParams['floorceiling']);
     }
 
     if(urlParams['generic']){
@@ -1723,25 +1771,61 @@ function loadParameters(){
         // weeks = (week-tempStartWeek);
     }
 
-    if(tempStartWeek>0 && tempStartWeek<maxWeek){
-        WEEK = tempStartWeek;
-    }else{
-        WEEK = 1;
-        tempStartWeek = 1;
-    }
+    // console.log("tEndWeek=" + tempEndWeek);
+    // console.log("tStartWeek=" + tempStartWeek);
 
-    if(tempEndWeek>WEEK && tempEndWeek<=maxWeek){
-        week=tempEndWeek;
+    // if(tempStartWeek>0 && tempStartWeek<maxWeek){
+    //     //week = tempStartWeek;
+    // }else{
+    //     //week = 1;
+    //     tempStartWeek = 1;
+    // }
+
+    // console.log("HEY THERE");
+    if(tempStartWeek>0 && tempEndWeek>0){
+        // console.log("in if");
+        // console.log(week);
+        if(tempEndWeek<=maxWeek && tempEndWeek>1){
+            //console.log("tEndWeekOkay");
+            week=tempEndWeek;
+        }else{
+            week=maxWeek;
+        }
+
+        if(tempStartWeek>0 && tempStartWeek<maxWeek && tempStartWeek<week){
+            //console.log("tStartWeekOkay");
+            weeks = week-tempStartWeek;
+            //week = tempStartWeek;
+        }else{
+            //week = 1;
+            // tempStartWeek = 1;
+            weeks = week - 1;
+        }
     }else{
-        week=maxWeek;
+        //console.log("IN ELSE");
+        week = maxWeek;
+        weeks = week-1;
+        // console.log(week);
+        // console.log(weeks);
     }
-    console.log("week is here " + week)
-    weeks = week-WEEK;
+    // console.log("maxweek is ");
+    // console.log(maxWeek);
+    // console.log("week is ");
+    // console.log(week);
+    // console.log("weeks is ");
+    // console.log(weeks);
+    // console.log("week is here " + week)
+    //weeks = week-WEEK;
+
+    loadWeeksConfig();
+
 }
 
 function loadWeeksConfig(){
     $("#configStartWeek").html("");
     $("#configEndWeek").html("");
+    //checkWeeks();
+    //console.log("loadweeksconfig maxweek " + maxWeek);
     for(var i=1;i<=maxWeek;i++){
         if(i<maxWeek){
             $("#configStartWeek").append(function(){
@@ -1757,6 +1841,8 @@ function loadWeeksConfig(){
 }
 
 function updateConfig(){
+    //checkWeeks();
+
     $("#configPositionWrapper .configConfig").each(function(){
         $(this).attr('checked', false);
     })
@@ -1771,6 +1857,10 @@ function updateConfig(){
     }
 
     $("#configNumber").val(NUMPLAYERS);
+
+    $("#configYear").val(YEAR);
+
+    $("#configFloorCeiling").val(floorCeiling);
 
     $("#configScoring").val(SCORINGTYPE);
 
@@ -1794,7 +1884,9 @@ function updateConfig(){
         $("#configLabels").attr('checked', false);
     }
 
-    console.log(week + " is week in updateconfig");
+    checkWeeks();
+    loadWeeksConfig();
+    // console.log(week + " is week in updateconfig");
     $("#configStartWeek").val(parseInt(week-weeks));
     $("#configEndWeek").val(parseInt(week));
 }
@@ -1807,7 +1899,7 @@ function updateParameters(){
 
     //here you pass whatever you want to appear in the url after the domain /
     // window.history.pushState("object or string", "Title", "/"+newUrl );
-    console.log(newUrl);
+    // console.log(newUrl);
     window.history.replaceState(null, null, window.location.pathname+newUrl);
 
 
@@ -1835,12 +1927,12 @@ function refineUrl(){
 
 
 
-    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY);
+    var newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY + "&year=" + YEAR + "&floorceiling=" + floorCeiling);
     if(POSITION2!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels  + "&sort=" + SORTBY);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels  + "&sort=" + SORTBY + "&year=" + YEAR + "&floorceiling=" + floorCeiling);
     }
     if(POSITION3!=""){
-        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY);
+        newUrl = ("?numplayers=" + NUMPLAYERS + "&startweek=" + (week-weeks) + "&endweek=" + week + "&scoring=" + SCORINGTYPE + "&position1=" + POSITION1 + "&position2=" + POSITION2 + "&position3=" + POSITION3 + "&generic=" + generic + "&averages=" + showAvgs + "&labels=" + wantLabels + "&sort=" + SORTBY  + "&year=" + YEAR + "&floorceiling=" + floorCeiling);
     }
 
     return newUrl;
@@ -1848,8 +1940,9 @@ function refineUrl(){
 
 
 $( document ).ready(function() {
-
+    checkWeeks();
     loadParameters();
+    updateParameters();
     loadPage();
     updateConfig();
     pageListeners();
@@ -1945,6 +2038,8 @@ $( document ).ready(function() {
             $("#inactiveOverlay").removeClass("hidden");
             $("#inactiveOverlay").addClass("visible");
 
+            $("body").css("overflow","hidden");
+
             $("#configPanel").removeClass("configPanelClosed");
             $("#configPanel").addClass("configPanelOpen");
 
@@ -1952,6 +2047,8 @@ $( document ).ready(function() {
         }else{
             $("#inactiveOverlay").addClass("hidden");
             $("#inactiveOverlay").removeClass("visible");
+
+            $("body").css("overflow","");
 
             $("#configPanel").addClass("configPanelClosed");
             $("#configPanel").removeClass("configPanelOpen");
@@ -1962,15 +2059,20 @@ $( document ).ready(function() {
     })
 
     $("#updatePage").on("click", function(){
+        // checkWeeks();
         pullConfig();
+        updateParameters();
+        // checkWeeks();
         if(allowReload){
             setTimeout(reloadPage, 10);
         }else{
             console.log("ERROR");
         }
-        updateParameters();
+        // updateParameters();
         $("#inactiveOverlay").addClass("hidden");
         $("#inactiveOverlay").removeClass("visible");
+
+        $("body").css("overflow","");
 
         $("#configPanel").addClass("configPanelClosed");
         $("#configPanel").removeClass("configPanelOpen");

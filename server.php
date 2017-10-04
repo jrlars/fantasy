@@ -13,6 +13,7 @@ if ($_GET["purpose"] == "queryDB")
     $position3 = $_GET["position3"];
     $numPlayers = $_GET["numPlayers"];
     $scoringType = $_GET["scoringType"];
+    $year = $_GET["year"];
 
     $sort = $_GET["sort"];
 
@@ -31,7 +32,7 @@ if ($_GET["purpose"] == "queryDB")
 
     //$query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $scoringType )/($endWeek-$startWeek+1)) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position1' OR position='$position2' OR position='$position3' GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
 
-    $query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $sort )) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND (position='$position1' OR position='$position2' OR position='$position3') GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    $query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $sort )) as playerAvg FROM allPlayers WHERE year='$year' AND week BETWEEN $startWeek AND $endWeek AND (position='$position1' OR position='$position2' OR position='$position3') GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
 
 
 
@@ -55,8 +56,9 @@ if ($_GET["purpose"] == "queryTargets")
 {
     $startWeek = $_GET["startWeek"];
     $endWeek = $_GET["endWeek"];
+    $year = $_GET["year"];
 
-    $query = "SELECT team, SUM(targets) as targets FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek GROUP BY team";
+    $query = "SELECT team, SUM(targets) as targets FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' GROUP BY team";
 //    $query = “SELECT team, SUM(targets) FROM allPlayers GROUP BY team”;
 
 

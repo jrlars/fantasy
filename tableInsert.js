@@ -1,27 +1,28 @@
-var WEEK = 17;
+var WEEK = 3;
+var YEAR = 2017;
 var tableName = "allPlayers";
 
 var request = require("request"),
   	cheerio = require("cheerio"),
-   	url1 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=2016"; //start of QB urls
-   	url2 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=50";
-   	url3 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=100";
-    url4 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=2016"; //start of RB urls
-   	url5 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=50";
-   	url6 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=100";
-   	url7 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=150";
-   	url8 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=200";
-    url9 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016"; //start of WR urls
-   	url10 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=50";
-   	url11 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=100";
-   	url12 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=150";
-   	url13 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=200";
-   	url14 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=250";
-    url15 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=300";
-    url16 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=2016"; //start of TE urls
-   	url17 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=50";
-   	url18 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=100";
-   	url19 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=2016&startIndex=150";
+   	url1 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of QB urls
+   	url2 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	url3 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+    url4 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of RB urls
+   	url5 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	url6 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+   	url7 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+   	url8 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+    url9 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of WR urls
+   	url10 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	url11 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+   	url12 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+   	url13 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+   	url14 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
+    url15 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
+    url16 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of TE urls
+   	url17 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	url18 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+   	url19 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
     urls = [url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19];
 var fs = require('fs');
 
@@ -232,6 +233,7 @@ for(var j=0; j<urls.length ;j++){
           rushingYardsVar = (rushingYardsVarTemp * (-1));
         }
       }
+            //console.log(rushingYardsVar);
 			if(isNaN(rushingYardsVar) || rushingYardsVar==""){
 				rushingYardsVar = "NULL";
 			}
@@ -354,7 +356,7 @@ setTimeout(function(){
 	for(var i=0; i<playerNum-1;i++){
 
 
-    connection.query('INSERT INTO ' + tableName + ' (playerName, position, team, year, week, opponent, homeAway, completions, attempts, passingYards, passingTouchdowns, interceptions, rushes, rushingYards, rushingTouchdowns, receptions, receivingYards, receivingTouchdowns, targets, twopc, fumbles, miscTouchdown, standardPoints, halfPprPoints, pprPoints) VALUES ("' + arr[i] + '","' + positionArr[i] + '","' + teamArr[i] + '",' + 2016 + ',' + WEEK + ',"' + opponents[i] + '","' + homeAway[i] + '",' + completionsArray[i] + ',' + attemptsArray[i] + ',' + passingYards[i] + ',' + passingTouchdowns[i] + ',' + interceptions[i] + ','  + rushes[i] + ','  + rushingYards[i] + ','  + rushingTouchdowns[i] + ','  + receptions[i] + ','  + receivingYards[i] + ','  + receivingTouchdowns[i] + ','  + targets[i] + ','  + twopc[i] + ','  + fumbles[i] + ','  + miscTouchdowns[i] + ','  + standardPoints[i] + ',' + halfPprPoints[i] + ',' + pprPoints[i] + ') ON DUPLICATE KEY UPDATE playerName=playerName',function(err,rows){
+    connection.query('INSERT INTO ' + tableName + ' (playerName, position, team, year, week, opponent, homeAway, completions, attempts, passingYards, passingTouchdowns, interceptions, rushes, rushingYards, rushingTouchdowns, receptions, receivingYards, receivingTouchdowns, targets, twopc, fumbles, miscTouchdown, standardPoints, halfPprPoints, pprPoints) VALUES ("' + arr[i] + '","' + positionArr[i] + '","' + teamArr[i] + '",' + YEAR + ',' + WEEK + ',"' + opponents[i] + '","' + homeAway[i] + '",' + completionsArray[i] + ',' + attemptsArray[i] + ',' + passingYards[i] + ',' + passingTouchdowns[i] + ',' + interceptions[i] + ','  + rushes[i] + ','  + rushingYards[i] + ','  + rushingTouchdowns[i] + ','  + receptions[i] + ','  + receivingYards[i] + ','  + receivingTouchdowns[i] + ','  + targets[i] + ','  + twopc[i] + ','  + fumbles[i] + ','  + miscTouchdowns[i] + ','  + standardPoints[i] + ',' + halfPprPoints[i] + ',' + pprPoints[i] + ') ON DUPLICATE KEY UPDATE playerName=playerName',function(err,rows){
       //connection.query('INSERT INTO wk' + WEEK + 'players ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)');
       //console.log(playerName);
       if(err) throw err;
