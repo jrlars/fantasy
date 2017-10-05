@@ -9,7 +9,7 @@ var maxWeek = 17;
 function checkWeeks(){
     maxWeek = 17;
     if(YEAR==2017){
-        maxWeek = 3;
+        maxWeek = 4;
     }
     if(week>maxWeek){
         week = maxWeek;
@@ -917,10 +917,22 @@ function renderPage(dataArr){
             tempArr.push(d.values[i].val);
         }
 
+        var byeFlag = 0;
+        var sum = d3.sum(d.values, function(d){
+            if(d.vs == "BYE"){
+                byeFlag = 1;
+                return 0;
+            }else{
+                return d.val;
+            }
+        });
 
-        var sum = d3.sum(d.values, function(d) { return d.val; });
 
-        var avg = (sum/tempArr.length);
+        if(byeFlag){
+            var avg = (sum/(tempArr.length-1));
+        }else{
+            var avg = (sum/tempArr.length);
+        }
 
 
         d3.select(this).append('div')

@@ -25,14 +25,14 @@ if ($_GET["purpose"] == "queryDB")
         $sort = $scoringType;
     }
 
-    // $query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, team, AVG( $scoringType ) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position, team ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.team=B.team AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
-    //$query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, team, (SUM( $scoringType )/($endWeek-$startWeek+1)) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position, team ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.team=B.team AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    // $query = "SELECT * FROM nflPlayers A LEFT JOIN ( SELECT playerName, position, team, AVG( $scoringType ) as playerAvg FROM nflPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position, team ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.team=B.team AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    //$query = "SELECT * FROM nflPlayers A LEFT JOIN ( SELECT playerName, position, team, (SUM( $scoringType )/($endWeek-$startWeek+1)) as playerAvg FROM nflPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position, team ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.team=B.team AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
 
-    // $query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position,  AVG( $scoringType ) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    // $query = "SELECT * FROM nflPlayers A LEFT JOIN ( SELECT playerName, position,  AVG( $scoringType ) as playerAvg FROM nflPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position' GROUP BY playerName, position ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
 
-    //$query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $scoringType )/($endWeek-$startWeek+1)) as playerAvg FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position1' OR position='$position2' OR position='$position3' GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    //$query = "SELECT * FROM nflPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $scoringType )/($endWeek-$startWeek+1)) as playerAvg FROM nflPlayers WHERE week BETWEEN $startWeek AND $endWeek AND position='$position1' OR position='$position2' OR position='$position3' GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
 
-    $query = "SELECT * FROM allPlayers A LEFT JOIN ( SELECT playerName, position, (SUM( $sort )) as playerAvg FROM allPlayers WHERE year='$year' AND week BETWEEN $startWeek AND $endWeek AND (position='$position1' OR position='$position2' OR position='$position3') GROUP BY playerName ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerName=B.playerName AND A.position=B.position WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' AND B.playerName IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerName ASC, A.week ASC";
+    $query = "SELECT * FROM nflPlayers A LEFT JOIN ( SELECT playerID, (SUM( $sort )) as playerAvg FROM nflPlayers WHERE year='$year' AND week BETWEEN $startWeek AND $endWeek AND (position='$position1' OR position='$position2' OR position='$position3') GROUP BY playerID ORDER BY playerAvg DESC LIMIT $numPlayers) B ON A.playerID=B.playerID WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' AND B.playerID IS NOT NULL AND A.opponent <> 'NULL' ORDER BY B.playerAvg DESC, A.playerID ASC, A.week ASC";
 
 
 
@@ -58,8 +58,8 @@ if ($_GET["purpose"] == "queryTargets")
     $endWeek = $_GET["endWeek"];
     $year = $_GET["year"];
 
-    $query = "SELECT team, SUM(targets) as targets FROM allPlayers WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' GROUP BY team";
-//    $query = “SELECT team, SUM(targets) FROM allPlayers GROUP BY team”;
+    $query = "SELECT team, SUM(targets) as targets FROM nflPlayers WHERE week BETWEEN $startWeek AND $endWeek AND year='$year' GROUP BY team";
+//    $query = “SELECT team, SUM(targets) FROM nflPlayers GROUP BY team”;
 
 
 	$result = mysqli_query($db, $query);
@@ -81,7 +81,7 @@ if ($_GET["purpose"] == "queryTargets")
 if ($_GET["purpose"] == "getWRs")
 {
     echo ("here");
-    $query = "SELECT * FROM allPlayers";
+    $query = "SELECT * FROM nflPlayers";
     //$query = "SELECT * FROM wk" . $_GET['week'] . "players WHERE position='WR' ORDER BY " . $_GET['sort'] . " DESC limit " . $_GET['numplayers'];
 
 	$result = mysqli_query($db, $query);

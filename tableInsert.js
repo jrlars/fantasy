@@ -1,29 +1,56 @@
-var WEEK = 3;
+var WEEK = 4;
 var YEAR = 2017;
-var tableName = "allPlayers";
+var tableName = "nflPlayers";
 
 var request = require("request"),
-  	cheerio = require("cheerio"),
-   	url1 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of QB urls
-   	url2 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
-   	url3 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
-    url4 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of RB urls
-   	url5 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
-   	url6 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
-   	url7 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
-   	url8 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
-    url9 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of WR urls
-   	url10 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
-   	url11 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
-   	url12 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
-   	url13 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
-   	url14 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
-    url15 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
-    url16 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of TE urls
-   	url17 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
-   	url18 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
-   	url19 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
-    urls = [url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16, url17, url18, url19];
+  	cheerio = require("cheerio");
+
+   	var qb1 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of qb urls
+   	var qb2 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	var qb3 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+    var qb4 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+    var qb5 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+    var qb6 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
+    var qb7 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
+    var qb8 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=350";
+    var qb9 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=400";
+    var qb10 = "http://games.espn.com/ffl/leaders?slotCategoryId=0&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=450";
+
+    var rb1 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of rb urls
+   	var rb2 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	var rb3 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+    var rb4 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+    var rb5 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+    var rb6 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
+    var rb7 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
+    var rb8 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=350";
+    var rb9 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=400";
+    var rb10 = "http://games.espn.com/ffl/leaders?slotCategoryId=2&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=450";
+
+    var wr1 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of wr urls
+   	var wr2 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	var wr3 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+    var wr4 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+    var wr5 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+    var wr6 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
+    var wr7 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
+    var wr8 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=350";
+    var wr9 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=400";
+    var wr10 = "http://games.espn.com/ffl/leaders?slotCategoryId=4&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=450";
+
+    var te1 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR; //start of te urls
+   	var te2 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=50";
+   	var te3 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=100";
+    var te4 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=150";
+    var te5 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=200";
+    var te6 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=250";
+    var te7 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=300";
+    var te8 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=350";
+    var te9 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=400";
+    var te10 = "http://games.espn.com/ffl/leaders?slotCategoryId=6&scoringPeriodId=" + WEEK + "&seasonId=" + YEAR + "&startIndex=450";
+
+    var urls=[qb1, qb2, qb3, qb4, qb5, qb6, qb7, qb8, qb9, qb10, rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8, rb9, rb10, wr1, wr2, wr3, wr4, wr5, wr6, wr7, wr8, wr9, wr10, te1, te2, te3, te4, te5, te6, te7, te8, te9, te10];
+
 var fs = require('fs');
 
 
@@ -51,6 +78,7 @@ var playerData;
 var positionArr = [];
 var teamArr = [];
 var arr = [];
+var playerIDs = [];
 
 var opponents = [];
 var homeAway = [];
@@ -82,75 +110,42 @@ var playerNum = 1;
 
 for(var j=0; j<urls.length ;j++){
 
-	request(urls[j], function (error, response, body) {
-	  if (!error) {
+    request(urls[j], function (error, response, body) {
+        if (!error) {
 
-	  var $ = cheerio.load(body);
+        var $ = cheerio.load(body);
 
-		var name = $(".playerTableTable .playertablePlayerName a").html();
+        var name = $(".playerTableTable .playertablePlayerName a").html();
 
-		$(".playertablePlayerName").each(function( index ) {
+        $(".playertablePlayerName").each(function( index ) {
 
-		  var player =$( this ).text();
-		  var playerNameStart = 0;
-		  var playerNameEnd = player.indexOf(",");
-		  //console.log(player.indexOf("*"));
-		  if((player.indexOf("*")!==-1)&&(player.indexOf("*")<playerNameEnd)){
-		  	playerNameEnd = player.indexOf("*");
-		  }
+            var player =$( this ).text();
+            var playerNameStart = 0;
+            var playerNameEnd = player.indexOf(",");
 
-      // var playerTeam = player.replace(/^[^,]*, ([a-zA-Z]*).*/, "$1");
-      //console.log(player);
-      var playerTeam = player.replace(/^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/gi, "$1");
-      //console.log(player);
-      //console.log(playerTeam + " is playerTeam");
+            if((player.indexOf("*")!==-1)&&(player.indexOf("*")<playerNameEnd)){
+            	playerNameEnd = player.indexOf("*");
+            }
 
-      //console.log(playerTeam);
-      var playerPosition = player.replace(/^[^,]*, [a-zA-Z]*\s*([a-zA-Z]*).*/gi, "$1");
-    //  console.log(player);
-      //console.log(playerPosition + " is playerPosition");
-      //console.log(name);
-      //console.log(playerPosition);
+            var playerTeam = player.replace(/^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/gi, "$1");
 
+            var playerPosition = player.replace(/^[^,]*, [a-zA-Z]*\s*([a-zA-Z]*).*/gi, "$1");
 
-      //console.log(playerPosition);
-		  //playerTeam = playerTeam.toUpperCase();
-		  //teamArr.push(playerTeam);
+            teamArr.push(playerTeam);
+            positionArr.push(playerPosition);
 
-      //var matches = player.exec(/^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/gi);
+            var newPlayer = player.substr(playerNameStart, playerNameEnd);
+            arr.push(newPlayer);
 
+            var childrenNodes = $(this).children("a");
+            var playerID = $(childrenNodes[0]).attr("playerid");
+            playerIDs.push(parseInt(playerID));
 
-      // var regexpattern = /^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/gi;
-      // var matches = regexpattern.exec(player);
-      // console.log(matches[2]);
+            playerNum++;
 
+        });
 
-      //var playerTeam = player.replace(/^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/, "$1");
-      //var playerTeam = matches[0];
-      //console.log(playerTeam);
-      //var playerPosition = matches[1];
-      //console.log(playerPosition);
-      //var playerPosition = player.replace(/^[^,]*, ([a-zA-Z]*)[ ]*([a-zA-Z]*).*/, "$2");
-
-		  //playerTeam = playerTeam.toUpperCase();
-      //playerPosition = playerPosition.toUpperCase();
-      //var playerPosition = "failed";
-		  teamArr.push(playerTeam);
-      positionArr.push(playerPosition);
-
-		  var newPlayer = player.substr(playerNameStart, playerNameEnd);
-		  arr.push(newPlayer);
-
-// 		  var playerVal = "player" + playerNum;
-//
-// 		  obj[playerVal] = newPlayer;
-
-
-		  playerNum++;
-		  //console.log(playerNum);
-		});
-
-		$(".pncPlayerRow").each(function( index ) {
+        $(".pncPlayerRow").each(function( index ) {
 
             var opponent = $(this).find("td:nth-child(3)>div>a").html();
             var location = "home";
@@ -167,24 +162,24 @@ for(var j=0; j<urls.length ;j++){
             opponents.push(opponent);
             homeAway.push(location);
 
-			var passingRatio = $(this).find("td:nth-child(6)").html();
+        	var passingRatio = $(this).find("td:nth-child(6)").html();
 
-			var completions = passingRatio.replace(/^([0-9]*)\/([0-9]*)/, "$1");
-			var attempts = passingRatio.replace(/^([0-9]*)\/([0-9]*)/, "$2");
+        	var completions = passingRatio.replace(/^([0-9]*)\/([0-9]*)/, "$1");
+        	var attempts = passingRatio.replace(/^([0-9]*)\/([0-9]*)/, "$2");
 
-			if(isNaN(completions) || completions==""){
-				completions = "NULL";
-			}
-			completionsArray.push(completions);
+        	if(isNaN(completions) || completions==""){
+        		completions = "NULL";
+        	}
+        	completionsArray.push(completions);
 
-			if(isNaN(attempts) || attempts==""){
-				attempts = "NULL";
-			}
-			attemptsArray.push(attempts);
+        	if(isNaN(attempts) || attempts==""){
+        		attempts = "NULL";
+        	}
+        	attemptsArray.push(attempts);
 
 
-			var passingYardsVar = $(this).find("td:nth-child(7)").html();
-      if(passingYardsVar[0]=="-"){
+        	var passingYardsVar = $(this).find("td:nth-child(7)").html();
+        if(passingYardsVar[0]=="-"){
         if(passingYardsVar[1]=="-"){
           //console.log("BYE WEEK");
         }else{
@@ -193,37 +188,37 @@ for(var j=0; j<urls.length ;j++){
           //console.log(passingYardsVarTemp);
           passingYardsVar = (passingYardsVarTemp * (-1));
         }
-      }
-			if(isNaN(passingYardsVar) || passingYardsVar==""){
-				passingYardsVar = "NULL";
-			}
-			passingYards.push(passingYardsVar);
+        }
+        	if(isNaN(passingYardsVar) || passingYardsVar==""){
+        		passingYardsVar = "NULL";
+        	}
+        	passingYards.push(passingYardsVar);
 
 
-			var passingTouchdownsVar = $(this).find("td:nth-child(8)").html();
-			if(isNaN(passingTouchdownsVar) || passingTouchdownsVar==""){
-				passingTouchdownsVar = "NULL";
-			}
-			passingTouchdowns.push(passingTouchdownsVar);
+        	var passingTouchdownsVar = $(this).find("td:nth-child(8)").html();
+        	if(isNaN(passingTouchdownsVar) || passingTouchdownsVar==""){
+        		passingTouchdownsVar = "NULL";
+        	}
+        	passingTouchdowns.push(passingTouchdownsVar);
 
 
-			var interceptionsVar = $(this).find("td:nth-child(9)").html();
-			if(isNaN(interceptionsVar) || interceptionsVar==""){
-				interceptionsVar = "NULL";
-			}
-			interceptions.push(interceptionsVar);
+        	var interceptionsVar = $(this).find("td:nth-child(9)").html();
+        	if(isNaN(interceptionsVar) || interceptionsVar==""){
+        		interceptionsVar = "NULL";
+        	}
+        	interceptions.push(interceptionsVar);
 
 
 
-			var rushesVar = $(this).find("td:nth-child(11)").html();
-			if(isNaN(rushesVar) || rushesVar==""){
-				rushesVar = "NULL";
-			}
-			rushes.push(rushesVar);
+        	var rushesVar = $(this).find("td:nth-child(11)").html();
+        	if(isNaN(rushesVar) || rushesVar==""){
+        		rushesVar = "NULL";
+        	}
+        	rushes.push(rushesVar);
 
 
-			var rushingYardsVar = $(this).find("td:nth-child(12)").html();
-      if(rushingYardsVar[0]=="-"){
+        	var rushingYardsVar = $(this).find("td:nth-child(12)").html();
+        if(rushingYardsVar[0]=="-"){
         if(rushingYardsVar[1]=="-"){
           //console.log("BYE WEEK");
         }else{
@@ -232,31 +227,31 @@ for(var j=0; j<urls.length ;j++){
           //console.log(rushingYardsVarTemp);
           rushingYardsVar = (rushingYardsVarTemp * (-1));
         }
-      }
+        }
             //console.log(rushingYardsVar);
-			if(isNaN(rushingYardsVar) || rushingYardsVar==""){
-				rushingYardsVar = "NULL";
-			}
-			rushingYards.push(rushingYardsVar);
+        	if(isNaN(rushingYardsVar) || rushingYardsVar==""){
+        		rushingYardsVar = "NULL";
+        	}
+        	rushingYards.push(rushingYardsVar);
 
 
-			var rushingTouchdownsVar = $(this).find("td:nth-child(13)").html();
-			if(isNaN(rushingTouchdownsVar) || rushingTouchdownsVar==""){
-				rushingTouchdownsVar = "NULL";
-			}
-			rushingTouchdowns.push(rushingTouchdownsVar);
+        	var rushingTouchdownsVar = $(this).find("td:nth-child(13)").html();
+        	if(isNaN(rushingTouchdownsVar) || rushingTouchdownsVar==""){
+        		rushingTouchdownsVar = "NULL";
+        	}
+        	rushingTouchdowns.push(rushingTouchdownsVar);
 
 
 
-			var receptionsVar = $(this).find("td:nth-child(15)").html();
-			if(isNaN(receptionsVar) || receptionsVar==""){
-				receptionsVar = "NULL";
-			}
-			receptions.push(receptionsVar);
+        	var receptionsVar = $(this).find("td:nth-child(15)").html();
+        	if(isNaN(receptionsVar) || receptionsVar==""){
+        		receptionsVar = "NULL";
+        	}
+        	receptions.push(receptionsVar);
 
 
-			var receivingYardsVar = $(this).find("td:nth-child(16)").html();
-      if(receivingYardsVar[0]=="-"){
+        	var receivingYardsVar = $(this).find("td:nth-child(16)").html();
+        if(receivingYardsVar[0]=="-"){
         if(receivingYardsVar[1]=="-"){
           //console.log("BYE WEEK");
         }else{
@@ -265,89 +260,126 @@ for(var j=0; j<urls.length ;j++){
           //console.log(receivingYardsVarTemp);
           receivingYardsVar = (receivingYardsVarTemp * (-1));
         }
-      }
-			if(isNaN(receivingYardsVar) || receivingYardsVar==""){
-				receivingYardsVar = "NULL";
-			}
-			receivingYards.push(receivingYardsVar);
+        }
+        	if(isNaN(receivingYardsVar) || receivingYardsVar==""){
+        		receivingYardsVar = "NULL";
+        	}
+        	receivingYards.push(receivingYardsVar);
 
 
-			var receivingTouchdownsVar = $(this).find("td:nth-child(17)").html();
-			if(isNaN(receivingTouchdownsVar) || receivingTouchdownsVar==""){
-				receivingTouchdownsVar = "NULL";
-			}
-			receivingTouchdowns.push(receivingTouchdownsVar);
+        	var receivingTouchdownsVar = $(this).find("td:nth-child(17)").html();
+        	if(isNaN(receivingTouchdownsVar) || receivingTouchdownsVar==""){
+        		receivingTouchdownsVar = "NULL";
+        	}
+        	receivingTouchdowns.push(receivingTouchdownsVar);
 
 
-			var targetsVar = $(this).find("td:nth-child(18)").html();
-			if(isNaN(targetsVar) || targetsVar==""){
-				targetsVar = "NULL";
-			}
-      // if(isNaN(targets)){
-      //   console.log("Is an integer");
-      // }else{
-      //   console.log("Isn't an integer");
-      // }
-			targets.push(targetsVar);
+        	var targetsVar = $(this).find("td:nth-child(18)").html();
+        	if(isNaN(targetsVar) || targetsVar==""){
+        		targetsVar = "NULL";
+        	}
+
+        	targets.push(targetsVar);
 
 
 
-			var twopcVar = $(this).find("td:nth-child(20)").html();
-			if(isNaN(twopcVar) || twopcVar==""){
-				twopcVar = "NULL";
-			}
-			twopc.push(twopcVar);
+        	var twopcVar = $(this).find("td:nth-child(20)").html();
+        	if(isNaN(twopcVar) || twopcVar==""){
+        		twopcVar = "NULL";
+        	}
+        	twopc.push(twopcVar);
 
 
-			var fumblesVar = $(this).find("td:nth-child(21)").html();
-			if(isNaN(fumblesVar) || fumblesVar==""){
-				fumblesVar = "NULL";
-			}
-			fumbles.push(fumblesVar);
+        	var fumblesVar = $(this).find("td:nth-child(21)").html();
+        	if(isNaN(fumblesVar) || fumblesVar==""){
+        		fumblesVar = "NULL";
+        	}
+        	fumbles.push(fumblesVar);
 
 
-			var miscTouchdownsVar = $(this).find("td:nth-child(22)").html();
-			if(isNaN(miscTouchdownsVar) || miscTouchdownsVar==""){
-				miscTouchdownsVar = "NULL";
-			}
-			miscTouchdowns.push(miscTouchdownsVar);
+        	var miscTouchdownsVar = $(this).find("td:nth-child(22)").html();
+        	if(isNaN(miscTouchdownsVar) || miscTouchdownsVar==""){
+        		miscTouchdownsVar = "NULL";
+        	}
+        	miscTouchdowns.push(miscTouchdownsVar);
+
+            var pprPointsVar;
+            var halfPprPointsVar;
+            var standardPointsVar;
+            if(YEAR==2016){
+                standardPointsVar = $(this).find("td:nth-child(24)").html();
+            	if(isNaN(standardPointsVar) || standardPointsVar==""){
+            		standardPointsVar = "NULL";
+            		halfPprPointsVar = standardPointsVar;
+            		pprPointsVar = standardPointsVar;
+            	}else{
+            		if(isNaN(receptionsVar) || receptionsVar==""){
+            			halfPprPointsVar = "NULL";
+            			pprPointsVar = "NULL";
+            		}else{
+            			halfPprPointsVar = (parseFloat(standardPointsVar) + (parseInt(receptionsVar)/2));
+            			pprPointsVar = (parseFloat(standardPointsVar) + (parseInt(receptionsVar)));
+            		}
+            	}
+            	// standardPoints.push(standardPointsVar);
+
+            }else{
+                pprPointsVar = $(this).find("td:nth-child(24)").html();
+            	if(isNaN(pprPointsVar) || pprPointsVar==""){
+            		pprPointsVar = "NULL";
+            		halfPprPointsVar = pprPointsVar;
+            		standardPointsVar = pprPointsVar;
+            	}else{
+            		if(isNaN(receptionsVar) || receptionsVar==""){
+                        pprPointsVar = "NULL";
+            			halfPprPointsVar = "NULL";
+            			standardPointsVar = "NULL";
+            		}else{
+            			halfPprPointsVar = (parseFloat(pprPointsVar) - (parseInt(receptionsVar)/2));
+            			standardPointsVar = (parseFloat(pprPointsVar) - (parseInt(receptionsVar)));
+            		}
+            	}
+            	// standardPoints.push(standardPointsVar);
+            }
+            // var standardPointsVar = $(this).find("td:nth-child(24)").html();
+        	// var halfPprPointsVar;
+        	// var pprPointsVar;
+        	// if(isNaN(standardPointsVar) || standardPointsVar==""){
+        	// 	standardPointsVar = "NULL";
+        	// 	halfPprPointsVar = standardPointsVar;
+        	// 	pprPointsVar = standardPointsVar;
+        	// }else{
+        	// 	if(isNaN(receptionsVar) || receptionsVar==""){
+        	// 		halfPprPointsVar = "NULL";
+        	// 		pprPointsVar = "NULL";
+        	// 	}else{
+        	// 		halfPprPointsVar = (parseInt(standardPointsVar) + (parseInt(receptionsVar)/2));
+        	// 		pprPointsVar = (parseInt(standardPointsVar) + (parseInt(receptionsVar)));
+        	// 	}
+        	// }
+        	// standardPoints.push(standardPointsVar);
+
+            if((isNaN(standardPointsVar) || standardPointsVar=="") && standardPointsVar!==0){
+        		standardPointsVar = "NULL";
+        	}
+            standardPoints.push(standardPointsVar);
+
+            if((isNaN(halfPprPointsVar) || halfPprPointsVar=="") && halfPprPointsVar!==0){
+        		halfPprPointsVar = "NULL";
+        	}
+        	halfPprPoints.push(halfPprPointsVar);
+
+        	if((isNaN(pprPointsVar) || pprPointsVar=="") && pprPointsVar!==0){
+        		pprPointsVar = "NULL";
+        	}
+        	pprPoints.push(pprPointsVar);
+
+        });
 
 
-
-			var standardPointsVar = $(this).find("td:nth-child(24)").html();
-			var halfPprPointsVar;
-			var pprPointsVar;
-			if(isNaN(standardPointsVar) || standardPointsVar==""){
-				standardPointsVar = "NULL";
-				halfPprPointsVar = standardPointsVar;
-				pprPointsVar = standardPointsVar;
-			}else{
-				if(isNaN(receptionsVar) || receptionsVar==""){
-					halfPprPointsVar = "NULL";
-					pprPointsVar = "NULL";
-				}else{
-					halfPprPointsVar = (parseInt(standardPointsVar) + (parseInt(receptionsVar)/2));
-					pprPointsVar = (parseInt(standardPointsVar) + (parseInt(receptionsVar)));
-				}
-			}
-			standardPoints.push(standardPointsVar);
-
-			if((isNaN(halfPprPointsVar) || halfPprPointsVar=="") && halfPprPointsVar!==0){
-				halfPprPointsVar = "NULL";
-			}
-			halfPprPoints.push(halfPprPointsVar);
-
-			if((isNaN(pprPointsVar) || pprPointsVar=="") && pprPointsVar!==0){
-				pprPointsVar = "NULL";
-			}
-			pprPoints.push(pprPointsVar);
-
-		});
-
-
-	  } else {
-		console.log("We’ve encountered an error: " + error);
-	  }
+        } else {
+        console.log("We’ve encountered an error: " + error);
+        }
 	});
 }
 
@@ -356,7 +388,7 @@ setTimeout(function(){
 	for(var i=0; i<playerNum-1;i++){
 
 
-    connection.query('INSERT INTO ' + tableName + ' (playerName, position, team, year, week, opponent, homeAway, completions, attempts, passingYards, passingTouchdowns, interceptions, rushes, rushingYards, rushingTouchdowns, receptions, receivingYards, receivingTouchdowns, targets, twopc, fumbles, miscTouchdown, standardPoints, halfPprPoints, pprPoints) VALUES ("' + arr[i] + '","' + positionArr[i] + '","' + teamArr[i] + '",' + YEAR + ',' + WEEK + ',"' + opponents[i] + '","' + homeAway[i] + '",' + completionsArray[i] + ',' + attemptsArray[i] + ',' + passingYards[i] + ',' + passingTouchdowns[i] + ',' + interceptions[i] + ','  + rushes[i] + ','  + rushingYards[i] + ','  + rushingTouchdowns[i] + ','  + receptions[i] + ','  + receivingYards[i] + ','  + receivingTouchdowns[i] + ','  + targets[i] + ','  + twopc[i] + ','  + fumbles[i] + ','  + miscTouchdowns[i] + ','  + standardPoints[i] + ',' + halfPprPoints[i] + ',' + pprPoints[i] + ') ON DUPLICATE KEY UPDATE playerName=playerName',function(err,rows){
+    connection.query('INSERT INTO ' + tableName + ' (playerName, playerID, position, team, year, week, opponent, homeAway, completions, attempts, passingYards, passingTouchdowns, interceptions, rushes, rushingYards, rushingTouchdowns, receptions, receivingYards, receivingTouchdowns, targets, twopc, fumbles, miscTouchdown, standardPoints, halfPprPoints, pprPoints) VALUES ("' + arr[i] + '","' + playerIDs[i] + '","' + positionArr[i] + '","' + teamArr[i] + '",' + YEAR + ',' + WEEK + ',"' + opponents[i] + '","' + homeAway[i] + '",' + completionsArray[i] + ',' + attemptsArray[i] + ',' + passingYards[i] + ',' + passingTouchdowns[i] + ',' + interceptions[i] + ','  + rushes[i] + ','  + rushingYards[i] + ','  + rushingTouchdowns[i] + ','  + receptions[i] + ','  + receivingYards[i] + ','  + receivingTouchdowns[i] + ','  + targets[i] + ','  + twopc[i] + ','  + fumbles[i] + ','  + miscTouchdowns[i] + ','  + standardPoints[i] + ',' + halfPprPoints[i] + ',' + pprPoints[i] + ') ON DUPLICATE KEY UPDATE playerName=playerName',function(err,rows){
       //connection.query('INSERT INTO wk' + WEEK + 'players ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)');
       //console.log(playerName);
       if(err) throw err;
@@ -384,4 +416,4 @@ setTimeout(function(){
 		  // Ensures all previously enqueued queries are still
 		  // before sending a COM_QUIT packet to the MySQL server.
 		});
-}, 20000);
+}, 15000);
